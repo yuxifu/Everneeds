@@ -1,0 +1,70 @@
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha7'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+// Define versions in a single place
+ext {
+    // Sdk and tools
+    minSdkVersion = 14
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.0'
+
+    // App dependencies
+    supportLibraryVersion = '26.0.0-beta2'
+    guavaVersion = '18.0'
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    powerMockito = '1.6.2'
+    hamcrestVersion = '1.3'
+    runnerVersion = '0.5'
+    rulesVersion = '0.5'
+    espressoVersion = '2.2.2'
+    dexmakerVersion = '1.2'
+    dexmakerMockitoVersion = '1.2'
+}
+
+/*
+Guava: a set of core libraries that includes new collection types (such as multimap and multiset),
+immutable collections, a graph library, functional types, an in-memory cache, and APIs/utilities
+for concurrency, I/O, hashing, primitives, reflection, string processing, and much more!
+
+JUnit: a simple framework to write repeatable tests. It is an instance of the xUnit architecture
+for unit testing frameworks.
+
+Mockito: a tasty mocking framework for unit tests in Java
+
+powerMockito: PowerMockito is a PowerMock’s extension API to support Mockito.
+
+Hamcrest: a framework for software tests.
+
+Runner: Android Testing Support Library's runner
+
+Rules: Android Testing Support Library's rules
+
+Dexmaker: A Java-language API for doing compile time or runtime code generation targeting the
+Dalvik VM. Unlike cglib or ASM, this library creates Dalvik .dex files instead of Java .class files.
+
+dexmaker-mockito:
+
+ */
