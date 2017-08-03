@@ -19,22 +19,23 @@ package com.example.android.architecture.blueprints.everneeds;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.example.android.architecture.blueprints.everneeds.data.source.local.TasksLocalDataSource;
+import com.example.android.architecture.blueprints.everneeds.data.FakeTasksRemoteDataSource;
 import com.example.android.architecture.blueprints.everneeds.data.source.TasksDataSource;
-import com.example.android.architecture.blueprints.everneeds.data.source.remote.TasksRemoteDataSource;
 import com.example.android.architecture.blueprints.everneeds.data.source.TasksRepository;
+import com.example.android.architecture.blueprints.everneeds.data.source.local.TasksLocalDataSource;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Enables injection of production implementations for
- * {@link TasksDataSource} at compile time.
+ * Enables injection of mock implementations for
+ * {@link TasksDataSource} at compile time. This is useful for testing, since it allows us to use
+ * a fake instance of the class to isolate the dependencies and run a test hermetically.
  */
 public class Injection {
 
     public static TasksRepository provideTasksRepository(@NonNull Context context) {
         checkNotNull(context);
-        return TasksRepository.getInstance(TasksRemoteDataSource.getInstance(),
+        return TasksRepository.getInstance(FakeTasksRemoteDataSource.getInstance(),
                 TasksLocalDataSource.getInstance(context));
     }
 }
