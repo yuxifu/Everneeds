@@ -25,23 +25,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.yuxifu.everneeds.tasks.TasksActivity"
+            android:name="com.yuxifu.everneeds.todoapp.tasks.TasksActivity"
             android:theme="@style/AppTheme.OverlapSystemBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.yuxifu.everneeds.taskdetail.TaskDetailActivity" />
-        <activity android:name="com.yuxifu.everneeds.addedittask.AddEditTaskActivity" />
+        <activity android:name="com.yuxifu.everneeds.todoapp.taskdetail.TaskDetailActivity" />
+        <activity android:name="com.yuxifu.everneeds.todoapp.addedittask.AddEditTaskActivity" />
         <activity
-            android:name="com.yuxifu.everneeds.statistics.StatisticsActivity"
-            android:parentActivityName="com.yuxifu.everneeds.tasks.TasksActivity"
+            android:name="com.yuxifu.everneeds.todoapp.statistics.StatisticsActivity"
+            android:parentActivityName="com.yuxifu.everneeds.todoapp.tasks.TasksActivity"
             tools:ignore="UnusedAttribute">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yuxifu.everneeds.tasks.TasksActivity" />
+                android:value="com.yuxifu.everneeds.todoapp.tasks.TasksActivity" />
         </activity>
     </application>
 
