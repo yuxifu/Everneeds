@@ -12,58 +12,108 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yuxifu.everneeds">
 
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_red"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.yuxifu.everneeds.todoapp.tasks.TasksActivity"
-            android:theme="@style/AppTheme.OverlapSystemBar">
+            android:name=".ui.home.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.system.SplashScreenActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.yuxifu.everneeds.todoapp.taskdetail.TaskDetailActivity" />
-        <activity android:name="com.yuxifu.everneeds.todoapp.addedittask.AddEditTaskActivity" />
+
         <activity
-            android:name="com.yuxifu.everneeds.todoapp.statistics.StatisticsActivity"
-            android:parentActivityName="com.yuxifu.everneeds.todoapp.tasks.TasksActivity"
+            android:name=".ui.misc.CheeseDetailActivity"
+            android:parentActivityName=".ui.home.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.HomeActivity" />
+        </activity>
+
+        <!-- todo list activities: keep for testing code to run -->
+        <activity
+            android:name="._exp.todoapp.tasks.TasksActivity"
+            android:theme="@style/AppTheme.OverlapSystemBar">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name="._exp.todoapp.taskdetail.TaskDetailActivity" />
+        <activity android:name="._exp.todoapp.addedittask.AddEditTaskActivity" />
+        <activity
+            android:name="._exp.todoapp.statistics.StatisticsActivity"
+            android:parentActivityName="._exp.todoapp.tasks.TasksActivity"
             tools:ignore="UnusedAttribute">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yuxifu.everneeds.todoapp.tasks.TasksActivity" />
+                android:value="_exp.todoapp.tasks.TasksActivity" />
         </activity>
+
     </application>
 
-</manifest>
+</manifest><!--
+    <activity
+                android:name=".todoapp.tasks.TasksActivity"
+                android:theme="@style/AppTheme.OverlapSystemBar">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+            <activity android:name=".todoapp.taskdetail.TaskDetailActivity" />
+            <activity android:name=".todoapp.addedittask.AddEditTaskActivity" />
+            <activity
+                android:name=".todoapp.statistics.StatisticsActivity"
+                android:parentActivityName=".todoapp.tasks.TasksActivity"
+                tools:ignore="UnusedAttribute">
+--><!-- Parent activity meta-data to support 4.0 and lower --><!--
+ <meta-data
+android:name="android.support.PARENT_ACTIVITY"
+android:valcom.yuxifu.everneeds._exp.todoappoapp.tasks.TasksActivity" />
+    </activity>
+--><!--
+      Yuxi Fu
 
-<!--  Yuxi Fu
+    android:allowBackup: Whether to allow the application to participate in the backup and restore infrastructure.
 
-android:allowBackup: Whether to allow the application to participate in the backup and restore infrastructure.
+    android:icon
 
-android:icon
+    android:label: A user-readable label for the application as a whole, and a default label for each of the application's components.
+    The label should be set as a reference to a string resource, so that it can be localized like other strings in the user interface.
 
-android:label: A user-readable label for the application as a whole, and a default label for each of the application's components.
-The label should be set as a reference to a string resource, so that it can be localized like other strings in the user interface.
+    android:supportsRtl: Declares whether your application is willing to support right-to-left (RTL) layouts.
+    The default value of this attribute is false.
 
-android:supportsRtl: Declares whether your application is willing to support right-to-left (RTL) layouts.
-The default value of this attribute is false.
+    android:theme: A reference to a style resource defining a default theme for all activities in the application.
+    Individual activities can override the default by setting their own theme attributes.
 
-android:theme: A reference to a style resource defining a default theme for all activities in the application.
-Individual activities can override the default by setting their own theme attributes.
-
-tools:ignore: Used by: Lint. This attribute accepts a comma-separated list of lint issue ID's that you'd
-like the tools to ignore on this element or any of its decendents.
-
+    tools:ignore: Used by: Lint. This attribute accepts a comma-separated list of lint issue ID's that you'd
+    like the tools to ignore on this element or any of its decendents.
 -->
