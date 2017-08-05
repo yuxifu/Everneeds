@@ -64,8 +64,8 @@
 
     <string name="bottombar_home_label">Home</string>
     <string name="bottombar_plan_label">Schedule</string>
-    <string name="bottombar_track_label">Keep</string>
-    <string name="bottombar_connect_label">Connect</string>
+    <string name="bottombar_track_label">Track</string>
+    <string name="bottombar_connect_label">People</string>
     <string name="bottombar_profile_label">Me</string>
 
     <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue

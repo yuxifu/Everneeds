@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        id="@+id/tab_home"
         icon="@drawable/ic_home"
+        id="@+id/tab_home"
         title="@string/bottombar_home_label" />
     <tab
-        id="@+id/tab_plan"
         icon="@drawable/ic_schedule"
+        id="@+id/tab_plan"
         title="@string/bottombar_plan_label" />
     <tab
-        id="@+id/tab_track"
         icon="@drawable/ic_track_changes"
+        id="@+id/tab_track"
         title="@string/bottombar_track_label" />
     <tab
-        id="@+id/tab_connect"
         icon="@drawable/ic_people"
+        id="@+id/tab_connect"
         title="@string/bottombar_connect_label" />
     <tab
-        id="@+id/tab_profile"
         icon="@drawable/ic_account_circle"
+        id="@+id/tab_profile"
         title="@string/bottombar_profile_label" />
-
 </tabs>
