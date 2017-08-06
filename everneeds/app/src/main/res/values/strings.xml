@@ -22,6 +22,7 @@
     <string name="task_marked_active">Task marked active</string>
     <string name="loading_tasks_error">Error while loading tasks</string>
     <string name="completed_tasks_cleared">Completed tasks cleared</string>
+    <string name="menu_edit">Edit</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_clear">Clear completed</string>
     <string name="menu_delete_task">Delete task</string>
@@ -63,9 +64,9 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="bottombar_home_label">Home</string>
-    <string name="bottombar_plan_label">Schedule</string>
+    <string name="bottombar_plan_label">Plan</string>
     <string name="bottombar_track_label">Track</string>
-    <string name="bottombar_connect_label">People</string>
+    <string name="bottombar_discover_label">Discover</string>
     <string name="bottombar_profile_label">Me</string>
 
     <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue

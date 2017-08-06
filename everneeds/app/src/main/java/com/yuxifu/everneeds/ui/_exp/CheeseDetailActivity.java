@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.yuxifu.everneeds.ui.misc;
+package com.yuxifu.everneeds.ui._exp;
 
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.data.misc.Cheeses;
+import com.yuxifu.everneeds.data._exp.Cheeses;
 
 import android.content.Intent;
 import android.os.Bundle;

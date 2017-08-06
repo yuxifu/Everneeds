@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yuxifu.everneeds.ui.misc;
+package com.yuxifu.everneeds.ui._exp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.data.misc.Cheeses;
+import com.yuxifu.everneeds.data._exp.Cheeses;
 
 public class CheeseListFragment extends Fragment {
 

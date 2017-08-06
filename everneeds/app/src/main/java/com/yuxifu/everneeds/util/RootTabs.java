@@ -16,8 +16,8 @@ public final class RootTabs {
                 return context.getString(R.string.bottombar_plan_label);
             case R.id.tab_track:
                 return context.getString(R.string.bottombar_track_label);
-            case R.id.tab_connect:
-                return context.getString(R.string.bottombar_connect_label);
+            case R.id.tab_discover:
+                return context.getString(R.string.bottombar_discover_label);
         }
         return "";
     }
