@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.roughike.bottombar.BottomBar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomBar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="bottom"
+    app:bb_activeTabAlpha="@dimen/bottom_bar_active_tab_alpha"
+    app:bb_inActiveTabAlpha="@dimen/bottom_bar_inactive_tab_alpha"
+    app:bb_tabXmlResource="@xml/bottombar_tabs" />
+
+    <!-- shy: put the BottomBar inside a CoordinatorLayout and it'll
+        automatically hide on scroll! -->
+    <!-- app:bb_behavior="shy" -->

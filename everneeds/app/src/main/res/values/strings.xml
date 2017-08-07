@@ -55,19 +55,19 @@
     <string name="no_tasks_active">You have no active TO-DOs!</string>
     <string name="no_tasks_completed">You have no completed TO-DOs!</string>
     <string name="no_tasks_add">Add a TO-DO item +</string>
-    <string name="refresh">Refresh</string>
+    <string name="menu_refresh">Refresh</string>
     <string name="title_activity_home">Home</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
-    <string name="action_settings">Settings</string>
+    <string name="menu_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="bottombar_home_label">Home</string>
-    <string name="bottombar_plan_label">Plan</string>
-    <string name="bottombar_track_label">Track</string>
-    <string name="bottombar_discover_label">Discover</string>
-    <string name="bottombar_profile_label">Me</string>
+    <string name="bottombar_home_title">Home</string>
+    <string name="bottombar_plan_title">Plan</string>
+    <string name="bottombar_track_title">Track</string>
+    <string name="bottombar_discover_title">Discover</string>
+    <string name="bottombar_profile_title">Me</string>
 
     <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
@@ -80,5 +80,8 @@
     <string name="menu_night_mode_day">Day (always)</string>
     <string name="menu_night_mode_night">Night (always)</string>
     <string name="menu_night_mode_auto">Auto</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

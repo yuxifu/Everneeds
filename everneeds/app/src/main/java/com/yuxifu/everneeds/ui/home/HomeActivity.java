@@ -1,38 +1,31 @@
 package com.yuxifu.everneeds.ui.home;
 
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
-import android.widget.TextView;
-
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabReselectListener;
-import com.roughike.bottombar.OnTabSelectListener;
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui._exp.CheeseListFragment;
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.yuxifu.everneeds.ui._exp.PlaceholderFragment;
+import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
+import com.yuxifu.everneeds.ui.base.BaseBottomNavActivity;
+import com.yuxifu.everneeds.util.ResourceHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseBottomNavActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
 
         // Use toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -45,22 +38,57 @@ public class HomeActivity extends AppCompatActivity {
             SmartTabLayout viewPagerTab = findViewById(R.id.viewpagertab);
             viewPagerTab.setViewPager(mViewPager);
         }
+    }
 
-        // Bottom tab bar
-        BottomBar bottomBar = findViewById(R.id.bottomBar);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                //Toast.makeText(getApplicationContext(), RootTabs.getTitle(HomeActivity.this, tabId) + " selected", Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity.getApplicationContext(), HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        activity.startActivity(intent);
+    }
 
-        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
-            @Override
-            public void onTabReSelected(@IdRes int tabId) {
-                //Toast.makeText(getApplicationContext(), RootTabs.getTitle(HomeActivity.this, tabId) + " reselected", Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static Intent getStartIntent(Context context) { // if required in a service etc
+        Intent intent = new Intent(context, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        return intent;
+    }
+
+    @Override
+    protected void initOnCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_home);
+    }
+
+    @Override
+    protected void onNavBarReselect() {
+        // do something if the tab has been reselected
+    }
+
+    @Override
+    protected int getCurrentBottomNavId() {
+        return R.id.tab_home;
+    }
+
+    @Override
+    protected BottomBar getBottomNavigationBar() {
+        return findViewById(R.id.bottomBar);
+    }
+
+    private void showItemClicked(int id, String textAppended) {
+        final CoordinatorLayout coordinatorLayout = findViewById(R.id.main_content);
+        if (coordinatorLayout != null) {
+            Snackbar snackbar = Snackbar
+                    .make(coordinatorLayout,
+                            ResourceHelper.idToTitle(HomeActivity.this, id) + textAppended,
+                            Snackbar.LENGTH_LONG)
+                    .setAction("CONFIRM", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Snackbar snackbar1 = Snackbar.make(coordinatorLayout,
+                                    "Message is confirmed!", Snackbar.LENGTH_SHORT);
+                            showSnackbar(snackbar1);
+                        }
+                    });
+            showSnackbar(snackbar);
+        }
     }
 
     @Override
@@ -72,103 +100,28 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        // Handle action bar item clicks here.
+        /*switch (item.getItemId()) {
+            case R.id.menu_settings:
+                return true;
+            default:
+                break;
+        }*/
+        showItemClicked(item.getItemId(), " selected.");
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
+        //
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            TextView textView = rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CheeseListFragment(), "Hello");
-        adapter.addFragment(PlaceholderFragment.newInstance(2), "Cute");
+        adapter.addFragment(new CheeseListFragment(), "Cheese");
+        adapter.addFragment(PlaceholderFragment.newInstance(2), "Note");
         adapter.addFragment(PlaceholderFragment.newInstance(3), "Calendar");
         adapter.addFragment(PlaceholderFragment.newInstance(4), "Birthday");
         adapter.addFragment(PlaceholderFragment.newInstance(5), "Projects");
         adapter.addFragment(PlaceholderFragment.newInstance(6), "Misc");
         viewPager.setAdapter(adapter);
     }
-
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    static class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragments = new ArrayList<>();
-        private final List<String> mFragmentTitles = new ArrayList<>();
-
-        ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        void addFragment(Fragment fragment, String title) {
-            mFragments.add(fragment);
-            mFragmentTitles.add(title);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragments.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitles.get(position);
-        }
-    }
-
 
 }
