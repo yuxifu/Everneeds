@@ -23,15 +23,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".ui.system.SplashScreenActivity"
@@ -43,12 +34,24 @@
         </activity>
 
         <activity
-            android:name=".ui._exp.CheeseDetailActivity"
-            android:parentActivityName=".ui.home.HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.HomeActivity" />
+            android:name=".ui.bottom_navigation.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+
+        <activity android:name=".ui.bottom_navigation.PlanActivity" />
+
+        <activity android:name=".ui.bottom_navigation.TrackActivity" />
+
+        <activity android:name=".ui.bottom_navigation.DiscoverActivity" />
+
+        <activity android:name=".ui.bottom_navigation.ProfileActivity" />
+
+        <activity android:name=".ui._exp.CheeseDetailActivity" />
 
         <!-- todo list activities: keep for testing code to run -->
         <activity
@@ -76,28 +79,9 @@
 
     </application>
 
-</manifest><!--
-    <activity
-                android:name=".todoapp.tasks.TasksActivity"
-                android:theme="@style/AppTheme.OverlapSystemBar">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
+</manifest>
 
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-            <activity android:name=".todoapp.taskdetail.TaskDetailActivity" />
-            <activity android:name=".todoapp.addedittask.AddEditTaskActivity" />
-            <activity
-                android:name=".todoapp.statistics.StatisticsActivity"
-                android:parentActivityName=".todoapp.tasks.TasksActivity"
-                tools:ignore="UnusedAttribute">
---><!-- Parent activity meta-data to support 4.0 and lower --><!--
- <meta-data
-android:name="android.support.PARENT_ACTIVITY"
-android:valcom.yuxifu.everneeds._exp.todoappoapp.tasks.TasksActivity" />
-    </activity>
---><!--
+<!--
       Yuxi Fu
 
     android:allowBackup: Whether to allow the application to participate in the backup and restore infrastructure.

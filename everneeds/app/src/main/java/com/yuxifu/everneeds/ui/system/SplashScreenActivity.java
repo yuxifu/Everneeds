@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.yuxifu.everneeds.ui.home.HomeActivity;
+import com.yuxifu.everneeds.ui.bottom_navigation.HomeActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

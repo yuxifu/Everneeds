@@ -1,4 +1,4 @@
-package com.yuxifu.everneeds.ui.home;
+package com.yuxifu.everneeds.ui.bottom_navigation;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,15 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.roughike.bottombar.BottomBar;
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui._exp.CheeseListFragment;
 import com.yuxifu.everneeds.ui._exp.PlaceholderFragment;
 import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
-import com.yuxifu.everneeds.ui.base.BaseBottomNavActivity;
 import com.yuxifu.everneeds.util.ResourceHelper;
 
-public class HomeActivity extends BaseBottomNavActivity {
+public class TrackActivity extends BaseBottomNavActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,35 +39,30 @@ public class HomeActivity extends BaseBottomNavActivity {
     }
 
     public static void start(Activity activity) {
-        Intent intent = new Intent(activity.getApplicationContext(), HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        Intent intent = new Intent(activity.getApplicationContext(), TrackActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         activity.startActivity(intent);
     }
 
     public static Intent getStartIntent(Context context) { // if required in a service etc
-        Intent intent = new Intent(context, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        Intent intent = new Intent(context, TrackActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         return intent;
     }
 
     @Override
-    protected void initOnCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_home);
+    protected int getContentViewId() {
+        return R.layout.activity_track;
     }
 
     @Override
-    protected void onNavBarReselect() {
+    protected void onNavBarTabReselect() {
         // do something if the tab has been reselected
     }
 
     @Override
-    protected int getCurrentBottomNavId() {
-        return R.id.tab_home;
-    }
-
-    @Override
-    protected BottomBar getBottomNavigationBar() {
-        return findViewById(R.id.bottomBar);
+    protected int getCurrentBottomNavBarTabId() {
+        return R.id.tab_track;
     }
 
     private void showItemClicked(int id, String textAppended) {
@@ -77,7 +70,7 @@ public class HomeActivity extends BaseBottomNavActivity {
         if (coordinatorLayout != null) {
             Snackbar snackbar = Snackbar
                     .make(coordinatorLayout,
-                            ResourceHelper.idToTitle(HomeActivity.this, id) + textAppended,
+                            ResourceHelper.idToTitle(TrackActivity.this, id) + textAppended,
                             Snackbar.LENGTH_LONG)
                     .setAction("CONFIRM", new View.OnClickListener() {
                         @Override
@@ -94,7 +87,7 @@ public class HomeActivity extends BaseBottomNavActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu_track_options, menu);
         return true;
     }
 
@@ -116,7 +109,7 @@ public class HomeActivity extends BaseBottomNavActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new CheeseListFragment(), "Cheese");
-        adapter.addFragment(PlaceholderFragment.newInstance(2), "Note");
+        adapter.addFragment(PlaceholderFragment.newInstance(2), "Track");
         adapter.addFragment(PlaceholderFragment.newInstance(3), "Calendar");
         adapter.addFragment(PlaceholderFragment.newInstance(4), "Birthday");
         adapter.addFragment(PlaceholderFragment.newInstance(5), "Projects");
