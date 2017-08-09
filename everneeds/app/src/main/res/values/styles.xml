@@ -15,19 +15,44 @@
   -->
 <resources>
 
-    <!-- Base application theme. --><style name="AppTheme" parent="Base.AppTheme" />
+    <style name="AppTheme" parent="AppTheme.Used" />
 
-    <style name="Base.AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme.Used" parent="AppTheme.Green" />
+
+    <!-- theme white -->
+    <style name="AppTheme.White" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_white</item>
+        <item name="colorPrimaryDark">@color/primary_dark_white</item>
+        <item name="colorAccent">@color/accent_white</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+    <!-- theme blue grey -->
+    <style name="AppTheme.BlueGray" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_blue_grey</item>
+        <item name="colorPrimaryDark">@color/primary_dark_blue_grey</item>
+        <item name="colorAccent">@color/accent_blue_grey</item>
+    </style>
+
+    <!-- theme green -->
+    <style name="AppTheme.Green" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_green</item>
+        <item name="colorPrimaryDark">@color/primary_dark_green</item>
+        <item name="colorAccent">@color/accent_green</item>
+    </style>
+
+    <!-- theme purple -->
+    <style name="AppTheme.Purple" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_purple</item>
+        <item name="colorPrimaryDark">@color/primary_dark_purple</item>
+        <item name="colorAccent">@color/accent_purple</item>
+    </style>
+
+    <!-- theme for splash screen -->
+    <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    <!-- card dimens -->
     <style name="Widget.CardContent" parent="android:Widget">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
