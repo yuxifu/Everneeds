@@ -57,6 +57,7 @@
     <string name="no_tasks_add">Add a TO-DO item +</string>
     <string name="menu_refresh">Refresh</string>
     <string name="title_activity_home">Home</string>
+    <string name="title_activity_main">Home</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>

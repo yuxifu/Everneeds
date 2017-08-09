@@ -8,7 +8,7 @@
     android:layout_gravity="bottom"
     app:bb_activeTabAlpha="@dimen/bottom_bar_active_tab_alpha"
     app:bb_inActiveTabAlpha="@dimen/bottom_bar_inactive_tab_alpha"
-    app:bb_tabXmlResource="@xml/bottombar_tabs" />
+    app:bb_tabXmlResource="@xml/bottom_bar_tabs" />
 
     <!-- shy: put the BottomBar inside a CoordinatorLayout and it'll
         automatically hide on scroll! -->

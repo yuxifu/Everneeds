@@ -14,6 +14,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
+import com.roughike.bottombar.TabSelectionInterceptor;
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.util.ResourceHelper;
 
@@ -47,7 +48,7 @@ public abstract class BaseBottomNavActivity extends AppCompatActivity {
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                if (!ignoreTabSelectionListener) {
+                /*if (!ignoreTabSelectionListener) {
                     switch (tabId) {
                         case R.id.tab_home:
                             HomeActivity.start(BaseBottomNavActivity.this);
@@ -70,7 +71,7 @@ public abstract class BaseBottomNavActivity extends AppCompatActivity {
                             overridePendingTransition(0, 0);
                             break;
                     }
-                }
+                }*/
             }
         });
         bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
@@ -78,6 +79,35 @@ public abstract class BaseBottomNavActivity extends AppCompatActivity {
             public void onTabReSelected(@IdRes int tabId) {
                 if (!ignoreTabReselectionListener) {
                     onNavBarTabReselect();
+                }
+            }
+        });
+        bottomBar.setTabSelectionInterceptor(new TabSelectionInterceptor() {
+            @Override
+            public boolean shouldInterceptTabSelection(@IdRes int oldTabId, @IdRes int newTabId) {
+                switch (newTabId) {
+                    case R.id.tab_home:
+                        HomeActivity.start(BaseBottomNavActivity.this);
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.tab_plan:
+                        PlanActivity.start(BaseBottomNavActivity.this);
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.tab_track:
+                        TrackActivity.start(BaseBottomNavActivity.this);
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.tab_discover:
+                        DiscoverActivity.start(BaseBottomNavActivity.this);
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.tab_profile:
+                        ProfileActivity.start(BaseBottomNavActivity.this);
+                        overridePendingTransition(0, 0);
+                        return true;
+                    default:
+                        return false;
                 }
             }
         });
@@ -93,17 +123,18 @@ public abstract class BaseBottomNavActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        overridePendingTransition(0, 0);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         overridePendingTransition(0, 0);
-        ignoreTabSelectionListener = true;
+        /*ignoreTabSelectionListener = true;
         ignoreTabReselectionListener = true;
         bottomBar.selectTabWithId(getCurrentBottomNavBarTabId());
         ignoreTabSelectionListener = false;
-        ignoreTabReselectionListener = false;
+        ignoreTabReselectionListener = false;*/
     }
 
     // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
@@ -135,6 +166,7 @@ public abstract class BaseBottomNavActivity extends AppCompatActivity {
     public void setNavigationBarColor(int color) {
         bottomBar.setBackgroundColor(color);
     }
+
     public void hideNavigationBar() {
         bottomBar.setVisibility(View.GONE);
     }
