@@ -1,5 +1,6 @@
 package com.yuxifu.everneeds.ui.bottom_navigation;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
@@ -13,13 +14,17 @@ import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui._exp.CheeseListFragment;
-import com.yuxifu.everneeds.ui._exp.PlaceholderFragment;
 
 /**
  * Created by Yuxi on 8/7/17.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements HomeFragment.OnFragmentInteractionListener,
+        PlanFragment.OnFragmentInteractionListener,
+        TrackFragment.OnFragmentInteractionListener,
+        DiscoverFragment.OnFragmentInteractionListener,
+        ProfileFragment.OnFragmentInteractionListener {
 
     protected BottomBar bottomBar;
 
@@ -43,16 +48,16 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new CheeseListFragment();
                         break;
                     case R.id.tab_plan:
-                        selectedFragment = PlaceholderFragment.newInstance(1);
+                        selectedFragment = PlanFragment.newInstance("Hello from Plan", "");
                         break;
                     case R.id.tab_track:
-                        selectedFragment = PlaceholderFragment.newInstance(2);
+                        selectedFragment = PlanFragment.newInstance("Hello from Track", "");;
                         break;
                     case R.id.tab_discover:
-                        selectedFragment = PlaceholderFragment.newInstance(3);
+                        selectedFragment = PlanFragment.newInstance("Hello from Discover", "");;
                         break;
                     case R.id.tab_profile:
-                        selectedFragment = PlaceholderFragment.newInstance(4);
+                        selectedFragment = PlanFragment.newInstance("Hello from Profile", "");;
                         break;
                 }
                 if (selectedFragment != null) {
@@ -87,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    public void onFragmentInteraction(Uri uri) {
+        //
+
     }
 
 }
