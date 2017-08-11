@@ -4,12 +4,18 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.data._exp.Cheeses;
+import com.yuxifu.everneeds.ui._exp.CheeseRecyclerViewAdapter;
+import com.yuxifu.everneeds.util.CollectionHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,10 +72,32 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
-        TextView tv = v.findViewById(R.id.welcome_message);
-        tv.setText(mParam1);
-        return v;
+        final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // TextView
+        //TextView tv = rootView.findViewById(R.id.welcome_message);
+        //tv.setText(mParam1);
+
+        // RecyclerView
+        RecyclerView rv = rootView.findViewById(R.id.recycler_view);
+        setupRecyclerView(rv);
+
+        // close image button
+        ImageView iv = rootView.findViewById(R.id.close_what_s_new);
+        iv.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                CardView cv = rootView.findViewById(R.id.home_welcome_card);
+                cv.setVisibility(View.GONE);
+            }
+        });
+
+        return rootView;
+    }
+
+    private void setupRecyclerView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.setAdapter(new CheeseRecyclerViewAdapter(getActivity(),
+                CollectionHelper.getRandomSublist(Cheeses.sCheeseStrings, 30)));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
