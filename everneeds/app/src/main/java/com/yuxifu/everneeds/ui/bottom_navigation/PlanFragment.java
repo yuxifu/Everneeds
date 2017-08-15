@@ -4,7 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,7 +21,7 @@ import com.yuxifu.everneeds.R;
  * Use the {@link PlanFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PlanFragment extends Fragment {
+public class PlanFragment extends BaseNavigationFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,6 +32,7 @@ public class PlanFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private ViewPager mViewPager;
 
     public PlanFragment() {
         // Required empty public constructor
@@ -66,10 +69,11 @@ public class PlanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_plan, container, false);
-        TextView tv = v.findViewById(R.id.welcome_message);
+        final View rootView = super.onCreateView(inflater, container, savedInstanceState);
+
+        TextView tv = rootView.findViewById(R.id.welcome_message);
         tv.setText(mParam1);
-        return v;
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -110,4 +114,59 @@ public class PlanFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    @Override
+    protected int getFragmentLayoutId() {
+        return R.layout.fragment_plan;
+    }
+
+    @Override
+    protected int getNavigationViewMenuId() {
+        return R.menu.drawer_view_main;
+    }
+
+    @Override
+    protected int getOptionsMenuId() {
+        return R.menu.menu_plan_options;
+    }
+
+    @Override
+    protected ViewPager getViewPager() {
+        return mViewPager;
+    }
+
+    @Override
+    protected String getFragmentTitle() {
+        return getActivity().getString(R.string.bottombar_plan_title);
+    }
+
+    @Override
+    protected boolean useDrawerNavigation() {
+        return false;
+    }
+
+    @Override
+    protected boolean useSlidingTabs() {
+        return true;
+    }
+
+    @Override
+    protected boolean useOptionsMenu() {
+        return true;
+    }
+
+    @Override
+    public String getSlidingTabsTitle() {
+        return getFragmentTitle();
+    }
+
+    @Override
+    public boolean doOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            default:
+                break;
+        }
+        return false;
+    }
+
 }

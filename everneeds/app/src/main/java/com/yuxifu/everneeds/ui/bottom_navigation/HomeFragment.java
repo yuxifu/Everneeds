@@ -4,10 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,7 +29,7 @@ import com.yuxifu.everneeds.util.CollectionHelper;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseNavigationFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -72,11 +76,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        // TextView
-        //TextView tv = rootView.findViewById(R.id.welcome_message);
-        //tv.setText(mParam1);
+        final View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
         // RecyclerView
         RecyclerView rv = rootView.findViewById(R.id.recycler_view);
@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment {
     private void setupRecyclerView(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(new CheeseRecyclerViewAdapter(getActivity(),
-                CollectionHelper.getRandomSublist(Cheeses.sCheeseStrings, 30)));
+                CollectionHelper.getRandomSublist(Cheeses.sCheeseStrings, 50)));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -138,4 +138,82 @@ public class HomeFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    @Override
+    protected int getFragmentLayoutId() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    protected int getNavigationViewMenuId() {
+        return R.menu.drawer_view_home;
+    }
+
+    @Override
+    protected int getOptionsMenuId() {
+        return R.menu.menu_home_actions;
+    }
+
+    @Override
+    protected ViewPager getViewPager() {
+        return null;
+    }
+
+    @Override
+    protected String getFragmentTitle() {
+        return getActivity().getString(R.string.bottombar_home_title);
+    }
+
+    @Override
+    protected boolean useDrawerNavigation() {
+        return true;
+    }
+
+    @Override
+    protected boolean useSlidingTabs() {
+        return false;
+    }
+
+    @Override
+    protected boolean useOptionsMenu() {
+        return true;
+    }
+
+    @Override
+    public void doPrepareOptionsMenu(Menu menu){
+        switch (AppCompatDelegate.getDefaultNightMode()) {
+            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
+                menu.findItem(R.id.menu_night_mode_system).setChecked(true);
+                break;
+            case AppCompatDelegate.MODE_NIGHT_AUTO:
+                menu.findItem(R.id.menu_night_mode_auto).setChecked(true);
+                break;
+            case AppCompatDelegate.MODE_NIGHT_YES:
+                menu.findItem(R.id.menu_night_mode_night).setChecked(true);
+                break;
+            case AppCompatDelegate.MODE_NIGHT_NO:
+                menu.findItem(R.id.menu_night_mode_day).setChecked(true);
+                break;
+        }
+    }
+
+    @Override
+    public boolean doOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.menu_night_mode_system:
+                getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                return true;
+            case R.id.menu_night_mode_day:
+                getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                return true;
+            case R.id.menu_night_mode_night:
+                getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                return true;
+            case R.id.menu_night_mode_auto:
+                getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
+                return true;
+        }
+        return false;
+    }
 }
+

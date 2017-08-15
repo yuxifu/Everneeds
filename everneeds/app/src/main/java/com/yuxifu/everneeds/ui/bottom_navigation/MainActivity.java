@@ -1,10 +1,10 @@
 package com.yuxifu.everneeds.ui.bottom_navigation;
 
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -17,11 +17,15 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.util.ResourceHelper;
 
 /**
  * Created by Yuxi on 8/7/17.
@@ -34,8 +38,8 @@ public class MainActivity extends AppCompatActivity
         DiscoverFragment.OnFragmentInteractionListener,
         ProfileFragment.OnFragmentInteractionListener {
 
-    protected BottomBar bottomBar;
     private DrawerLayout mDrawerLayout;
+    private Toolbar mToolbar;
 
     @Override
     @CallSuper
@@ -44,25 +48,30 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main_auto_scroll);
 
         // Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        // Drawer
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
+            final ActionBar ab = getSupportActionBar();
+            if (ab != null) {
+                ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+                ab.setDisplayHomeAsUpEnabled(true);
+            }
         }
 
-        // bottom bar
-        bottomBar = findViewById(R.id.bottomBar);
+        // Sliding tabs
+        LinearLayout ll = findViewById(R.id.slidingTabsContainer);
+        ll.setVisibility(View.GONE);
+
+        // Bottom bar
+        BottomBar bottomBar = findViewById(R.id.bottomBar);
         bottomBar.setDefaultTab(R.id.tab_home);
 
-        // bottom bar listeners
+        // Bottom bar listeners
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -76,15 +85,12 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case R.id.tab_track:
                         selectedFragment = PlanFragment.newInstance("Hello from Track", "");
-                        ;
                         break;
                     case R.id.tab_discover:
                         selectedFragment = PlanFragment.newInstance("Hello from Discover", "");
-                        ;
                         break;
                     case R.id.tab_profile:
                         selectedFragment = PlanFragment.newInstance("Hello from Profile", "");
-                        ;
                         break;
                 }
                 if (selectedFragment != null) {
@@ -100,7 +106,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //Manually displaying the first fragment - one time only
+        // Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.contentContainer,
                 HomeFragment.newInstance("Hello from Home first.", ""));
@@ -111,8 +117,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
+                        if (fragment instanceof OnDrawerNavigationItemListener) {
+                            boolean val = ((OnDrawerNavigationItemListener) fragment).onNavigationItemSelected(menuItem);
+                            if (val) {
+                                mDrawerLayout.closeDrawers();
+                                return true;
+                            }
+                        }
+
+                        //
+                        Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                         mDrawerLayout.closeDrawers();
                         return true;
                     }
@@ -121,27 +137,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.cheese_sample_actions, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        switch (AppCompatDelegate.getDefaultNightMode()) {
-            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
-                menu.findItem(R.id.menu_night_mode_system).setChecked(true);
-                break;
-            case AppCompatDelegate.MODE_NIGHT_AUTO:
-                menu.findItem(R.id.menu_night_mode_auto).setChecked(true);
-                break;
-            case AppCompatDelegate.MODE_NIGHT_YES:
-                menu.findItem(R.id.menu_night_mode_night).setChecked(true);
-                break;
-            case AppCompatDelegate.MODE_NIGHT_NO:
-                menu.findItem(R.id.menu_night_mode_day).setChecked(true);
-                break;
-        }
-        return true;
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -150,28 +151,13 @@ public class MainActivity extends AppCompatActivity
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.menu_night_mode_system:
-                setNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                break;
-            case R.id.menu_night_mode_day:
-                setNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-            case R.id.menu_night_mode_night:
-                setNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-            case R.id.menu_night_mode_auto:
-                setNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
+            default:
+                Toast.makeText(MainActivity.this,
+                        ResourceHelper.idToTitle(this, item.getItemId()),
+                        Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
-        AppCompatDelegate.setDefaultNightMode(nightMode);
-
-        if (Build.VERSION.SDK_INT >= 11) {
-            recreate();
-        }
     }
 
     @Override
@@ -191,7 +177,33 @@ public class MainActivity extends AppCompatActivity
 
     public void onFragmentInteraction(Uri uri) {
         //
-
     }
 
+    //
+    public DrawerLayout getDrawerLayout() {
+        return mDrawerLayout;
+    }
+
+    public Toolbar getToolbar() {
+        return mToolbar;
+    }
+
+    //
+    public void enableDrawer(boolean enable) {
+        if (enable) {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            mToolbar.setNavigationIcon(R.drawable.ic_menu);
+        } else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mToolbar.setNavigationIcon(null);
+        }
+    }
+
+    //
+    public void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
+        AppCompatDelegate.setDefaultNightMode(nightMode);
+        recreate();
+    }
+
+    //
 }

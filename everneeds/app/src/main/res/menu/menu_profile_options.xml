@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.yuxifu.everneeds.ui.bottom_navigation.ProfileActivity">
     <item
-        android:id="@+id/menu_edit"
-        android:title="@string/menu_edit"
-        android:icon="@drawable/ic_edit"
+        android:id="@+id/menu_profile"
+        android:title="@string/bottombar_profile_title"
+        android:icon="@drawable/ic_account_square"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_filter"

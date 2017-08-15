@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.yuxifu.everneeds.ui.bottom_navigation.DiscoverActivity">
     <item
-        android:id="@+id/menu_edit"
-        android:title="@string/menu_edit"
-        android:icon="@drawable/ic_edit"
+        android:id="@+id/menu_discover"
+        android:title="@string/bottombar_discover_title"
+        android:icon="@drawable/ic_compass"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_filter"

@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.yuxifu.everneeds.ui.bottom_navigation.PlanActivity">
     <item
-        android:id="@+id/menu_edit"
-        android:title="@string/menu_edit"
-        android:icon="@drawable/ic_edit"
+        android:id="@+id/menu_plan"
+        android:title="@string/bottombar_plan_title"
+        android:icon="@drawable/ic_schedule"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_filter"

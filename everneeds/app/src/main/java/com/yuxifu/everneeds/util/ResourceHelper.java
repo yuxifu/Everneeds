@@ -29,14 +29,15 @@ public final class ResourceHelper {
                 return context.getString(R.string.bottombar_profile_title);
 
             //
-            case R.id.menu_edit:
-                return context.getString(R.string.menu_edit);
             case R.id.menu_filter:
                 return context.getString(R.string.menu_filter);
             case R.id.menu_refresh:
                 return context.getString(R.string.menu_refresh);
             case R.id.menu_settings:
                 return context.getString(R.string.menu_settings);
+            case R.id.menu_search:
+                return context.getString(R.string.menu_search);
+
         }
         return Integer.toString(id);
     }
