@@ -4,7 +4,7 @@
     tools:context="com.yuxifu.everneeds.ui.bottom_navigation.DiscoverActivity">
     <item
         android:id="@+id/menu_discover"
-        android:title="@string/bottombar_discover_title"
+        android:title="@string/nav_discover_title"
         android:icon="@drawable/ic_compass"
         app:showAsAction="ifRoom" />
     <item

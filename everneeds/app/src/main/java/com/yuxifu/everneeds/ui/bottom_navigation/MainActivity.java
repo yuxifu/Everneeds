@@ -6,7 +6,9 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -15,16 +17,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.ui._exp.PlaceholderItemFragment;
+import com.yuxifu.everneeds.ui._exp.dummy.DummyContent;
 import com.yuxifu.everneeds.util.ResourceHelper;
 
 /**
@@ -36,16 +40,22 @@ public class MainActivity extends AppCompatActivity
         PlanFragment.OnFragmentInteractionListener,
         TrackFragment.OnFragmentInteractionListener,
         DiscoverFragment.OnFragmentInteractionListener,
-        ProfileFragment.OnFragmentInteractionListener {
+        ProfileFragment.OnFragmentInteractionListener,
+        PlaceholderItemFragment.OnListFragmentInteractionListener {
 
     private DrawerLayout mDrawerLayout;
+    private CoordinatorLayout mCoordinatorLayout;
     private Toolbar mToolbar;
+    private BottomBar mBottomBar;
 
     @Override
     @CallSuper
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_auto_scroll);
+
+        //
+        mCoordinatorLayout = findViewById(R.id.main_content);
 
         // Toolbar
         mToolbar = findViewById(R.id.toolbar);
@@ -68,11 +78,11 @@ public class MainActivity extends AppCompatActivity
         ll.setVisibility(View.GONE);
 
         // Bottom bar
-        BottomBar bottomBar = findViewById(R.id.bottomBar);
-        bottomBar.setDefaultTab(R.id.tab_home);
+        mBottomBar = findViewById(R.id.bottomBar);
+        mBottomBar.setDefaultTab(R.id.tab_home);
 
         // Bottom bar listeners
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 Fragment selectedFragment = null;
@@ -100,7 +110,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+        mBottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
             }
@@ -128,7 +138,7 @@ public class MainActivity extends AppCompatActivity
                         }
 
                         //
-                        Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        showSnackbarShortMessage(menuItem.getTitle());
                         mDrawerLayout.closeDrawers();
                         return true;
                     }
@@ -152,9 +162,7 @@ public class MainActivity extends AppCompatActivity
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             default:
-                Toast.makeText(MainActivity.this,
-                        ResourceHelper.idToTitle(this, item.getItemId()),
-                        Toast.LENGTH_SHORT).show();
+                showSnackbarShortMessage(ResourceHelper.idToTitle(this, item.getItemId()));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -173,10 +181,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-    }
-
-    public void onFragmentInteraction(Uri uri) {
-        //
     }
 
     //
@@ -199,10 +203,52 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void showSnackbar(Snackbar snackbar) {
+        CoordinatorLayout.LayoutParams params
+                = (CoordinatorLayout.LayoutParams) snackbar.getView().getLayoutParams();
+        params.setMargins(params.leftMargin, params.topMargin, params.rightMargin,
+                mBottomBar.getHeight());
+        snackbar.getView().setLayoutParams(params);
+        snackbar.show();
+    }
+
+    public void showSnackbarShortMessage(CharSequence message) {
+        Snackbar snackbar = Snackbar
+                .make(mCoordinatorLayout,
+                        message,
+                        Snackbar.LENGTH_SHORT);
+        showSnackbar(snackbar);
+    }
+
     //
     public void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
         AppCompatDelegate.setDefaultNightMode(nightMode);
         recreate();
+    }
+
+    //
+    public int getThemePrimaryColor() {
+        final TypedValue value = new TypedValue();
+        this.getTheme().resolveAttribute(R.attr.colorPrimary, value, true);
+        return value.data;
+    }
+    public int getThemePrimaryDarkColor() {
+        final TypedValue value = new TypedValue();
+        this.getTheme().resolveAttribute(R.attr.colorPrimaryDark, value, true);
+        return value.data;
+    }
+    public int getThemeAccentColor() {
+        final TypedValue value = new TypedValue();
+        this.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
+        return value.data;
+    }
+
+    public void onFragmentInteraction(Uri uri) {
+        //
+    }
+
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        showSnackbarShortMessage(item.content + " clicked");
     }
 
     //

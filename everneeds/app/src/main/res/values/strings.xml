@@ -64,19 +64,19 @@
     <string name="menu_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="bottombar_home_title">Home</string>
-    <string name="bottombar_plan_title">Plan</string>
-    <string name="bottombar_track_title">Track</string>
-    <string name="bottombar_discover_title">Discover</string>
-    <string name="bottombar_profile_title">Me</string>
-
-    <string name="sliding_tabs_title">Tabs</string>
-
     <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
     bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
     cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
     the big cheese.</string>
+
+    <string name="nav_home_title">Home</string>
+    <string name="nav_schedule_title">Schedule</string>
+    <string name="nav_track_title">Track</string>
+    <string name="nav_discover_title">Discover</string>
+    <string name="nav_profile_title">Me</string>
+
+    <string name="sliding_tabs_title">Tabs</string>
 
     <string name="menu_night_mode">Night mode</string>
     <string name="menu_night_mode_system">Follow system</string>
@@ -88,5 +88,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_top_box_message">What\'s New</string>
+
+    <!-- home fragment screen -->
+    <string name="home_options_note">Notes</string>
 
 </resources>

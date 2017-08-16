@@ -175,6 +175,8 @@ public abstract class BaseNavigationFragment extends Fragment implements OnDrawe
             ViewPager viewPager = getViewPager();
             if (viewPager != null) {
                 SmartTabLayout tabs = slidingTabsContainer.findViewById(R.id.viewpagertab);
+                //tabs.setDefaultTabTextColor(activity.getThemePrimaryColor());
+                tabs.setSelectedIndicatorColors(activity.getThemeAccentColor());
                 tabs.setViewPager(viewPager);
             }
         } else {

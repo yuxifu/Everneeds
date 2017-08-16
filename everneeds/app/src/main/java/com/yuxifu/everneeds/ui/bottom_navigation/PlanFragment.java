@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.ui._exp.CheeseListFragment;
+import com.yuxifu.everneeds.ui._exp.PlaceholderItemFragment;
+import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,9 +73,20 @@ public class PlanFragment extends BaseNavigationFragment {
         // Inflate the layout for this fragment
         final View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
-        TextView tv = rootView.findViewById(R.id.welcome_message);
-        tv.setText(mParam1);
+        mViewPager  = rootView.findViewById(R.id.viewpager);
+        if (mViewPager != null) {
+            setupViewPager(mViewPager);
+        }
+
         return rootView;
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new CheeseListFragment(), "Calendar");
+        adapter.addFragment(PlaceholderItemFragment.newInstance(2), "To-Do");
+        adapter.addFragment(PlaceholderItemFragment.newInstance(1), "Wish");
+        viewPager.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -137,7 +150,7 @@ public class PlanFragment extends BaseNavigationFragment {
 
     @Override
     protected String getFragmentTitle() {
-        return getActivity().getString(R.string.bottombar_plan_title);
+        return getActivity().getString(R.string.nav_schedule_title);
     }
 
     @Override
@@ -155,10 +168,11 @@ public class PlanFragment extends BaseNavigationFragment {
         return true;
     }
 
-    @Override
+    /*@Override
     public String getSlidingTabsTitle() {
         return getFragmentTitle();
     }
+    */
 
     @Override
     public boolean doOptionsItemSelected(MenuItem item) {

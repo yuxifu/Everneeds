@@ -4,7 +4,7 @@
     tools:context="com.yuxifu.everneeds.ui.bottom_navigation.ProfileActivity">
     <item
         android:id="@+id/menu_profile"
-        android:title="@string/bottombar_profile_title"
+        android:title="@string/nav_profile_title"
         android:icon="@drawable/ic_account_square"
         app:showAsAction="ifRoom" />
     <item

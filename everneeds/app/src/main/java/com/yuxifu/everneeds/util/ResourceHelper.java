@@ -18,15 +18,15 @@ public final class ResourceHelper {
 
             //bottom tab titles
             case R.id.tab_home:
-                return context.getString(R.string.bottombar_home_title);
+                return context.getString(R.string.nav_home_title);
             case R.id.tab_plan:
-                return context.getString(R.string.bottombar_plan_title);
+                return context.getString(R.string.nav_schedule_title);
             case R.id.tab_track:
-                return context.getString(R.string.bottombar_track_title);
+                return context.getString(R.string.nav_track_title);
             case R.id.tab_discover:
-                return context.getString(R.string.bottombar_discover_title);
+                return context.getString(R.string.nav_discover_title);
             case R.id.tab_profile:
-                return context.getString(R.string.bottombar_profile_title);
+                return context.getString(R.string.nav_profile_title);
 
             //
             case R.id.menu_filter:

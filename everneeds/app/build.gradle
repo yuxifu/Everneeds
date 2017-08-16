@@ -81,6 +81,7 @@ dependencies {
     implementation "com.google.guava:guava:$rootProject.guavaVersion"
 
     // Dependencies for local unit tests
+    implementation 'com.android.support:recyclerview-v7:26.0.1'
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     testImplementation "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
     testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"

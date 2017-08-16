@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -82,14 +81,18 @@ public class HomeFragment extends BaseNavigationFragment {
         RecyclerView rv = rootView.findViewById(R.id.recycler_view);
         setupRecyclerView(rv);
 
-        // close image button
-        ImageView iv = rootView.findViewById(R.id.close_what_s_new);
-        iv.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                CardView cv = rootView.findViewById(R.id.home_welcome_card);
-                cv.setVisibility(View.GONE);
-            }
-        });
+        // hide home welcome card view
+        CardView cv = rootView.findViewById(R.id.home_welcome_card);
+        cv.setVisibility(View.GONE);
+        if (cv.getVisibility() == View.VISIBLE) {
+            ImageView iv = rootView.findViewById(R.id.close_what_s_new);
+            iv.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    CardView cv = rootView.findViewById(R.id.home_welcome_card);
+                    cv.setVisibility(View.GONE);
+                }
+            });
+        }
 
         return rootView;
     }
@@ -151,7 +154,7 @@ public class HomeFragment extends BaseNavigationFragment {
 
     @Override
     protected int getOptionsMenuId() {
-        return R.menu.menu_home_actions;
+        return R.menu.menu_home_options;
     }
 
     @Override
@@ -161,12 +164,12 @@ public class HomeFragment extends BaseNavigationFragment {
 
     @Override
     protected String getFragmentTitle() {
-        return getActivity().getString(R.string.bottombar_home_title);
+        return getActivity().getString(R.string.nav_home_title);
     }
 
     @Override
     protected boolean useDrawerNavigation() {
-        return true;
+        return false;
     }
 
     @Override
@@ -181,7 +184,7 @@ public class HomeFragment extends BaseNavigationFragment {
 
     @Override
     public void doPrepareOptionsMenu(Menu menu){
-        switch (AppCompatDelegate.getDefaultNightMode()) {
+        /*switch (AppCompatDelegate.getDefaultNightMode()) {
             case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
                 menu.findItem(R.id.menu_night_mode_system).setChecked(true);
                 break;
@@ -194,13 +197,13 @@ public class HomeFragment extends BaseNavigationFragment {
             case AppCompatDelegate.MODE_NIGHT_NO:
                 menu.findItem(R.id.menu_night_mode_day).setChecked(true);
                 break;
-        }
+        }*/
     }
 
     @Override
     public boolean doOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-            case R.id.menu_night_mode_system:
+            /*case R.id.menu_night_mode_system:
                 getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                 return true;
             case R.id.menu_night_mode_day:
@@ -211,7 +214,7 @@ public class HomeFragment extends BaseNavigationFragment {
                 return true;
             case R.id.menu_night_mode_auto:
                 getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
-                return true;
+                return true;*/
         }
         return false;
     }

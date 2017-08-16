@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,38 +15,52 @@
   -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/group_navigation"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home"
-            android:title="@string/bottombar_home_title" />
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/nav_home_title" />
         <item
             android:id="@+id/nav_plan"
-            android:icon="@drawable/ic_schedule"
-            android:title="@string/bottombar_plan_title" />
+            android:icon="@drawable/ic_schedule_black_24dp"
+            android:title="@string/nav_schedule_title" />
         <item
             android:id="@+id/nav_track"
-            android:icon="@drawable/ic_track_changes"
-            android:title="@string/bottombar_track_title" />
+            android:icon="@drawable/ic_track_changes_black_24dp"
+            android:title="@string/nav_track_title" />
         <item
             android:id="@+id/nav_discover"
-            android:icon="@drawable/ic_compass"
-            android:title="@string/bottombar_discover_title" />
+            android:icon="@drawable/ic_compass_black_24dp"
+            android:title="@string/nav_discover_title" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_account_square"
-            android:title="@string/bottombar_profile_title" />
+            android:icon="@drawable/ic_person_outline_black_24dp"
+            android:title="@string/nav_profile_title" />
     </group>
 
-    <item android:title="Sub items">
-        <menu>
-            <item
-                android:icon="@drawable/ic_list"
-                android:title="Sub item 1" />
-            <item
-                android:icon="@drawable/ic_statistics"
-                android:title="Sub item 2" />
-        </menu>
-    </item>
+    <group
+        android:id="@+id/group_more">
+        <item
+            android:id="@+id/nav_upgrade"
+            android:icon="@drawable/ic_arrow_upward_black_24dp"
+            android:title="Upgrade Account" />
+        <item
+            android:id="@+id/nav_explorer"
+            android:icon="@drawable/ic_help_outline_black_24dp"
+            android:title="Explore" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="About" />
+
+    </group>
 
 </menu>
+
+    <!-- use smaller icons 24dp with 4dp surrounding margins  -->

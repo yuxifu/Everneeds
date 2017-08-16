@@ -4,7 +4,7 @@
     tools:context="com.yuxifu.everneeds.ui.bottom_navigation.PlanActivity">
     <item
         android:id="@+id/menu_plan"
-        android:title="@string/bottombar_plan_title"
+        android:title="@string/nav_schedule_title"
         android:icon="@drawable/ic_schedule"
         app:showAsAction="ifRoom" />
     <item
