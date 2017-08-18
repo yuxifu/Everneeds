@@ -6,40 +6,14 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.util.TypedValue;
 
-import com.yuxifu.everneeds.R;
-
 /**
  * Created by Yuxi on 8/3/17.
  */
 
 public final class ResourceHelper {
-    public static String idToTitle(Context context, int id) {
-        switch (id) {
-
-            //bottom tab titles
-            case R.id.tab_home:
-                return context.getString(R.string.nav_home_title);
-            case R.id.tab_plan:
-                return context.getString(R.string.nav_schedule_title);
-            case R.id.tab_track:
-                return context.getString(R.string.nav_track_title);
-            case R.id.tab_discover:
-                return context.getString(R.string.nav_discover_title);
-            case R.id.tab_profile:
-                return context.getString(R.string.nav_profile_title);
-
-            //
-            case R.id.menu_filter:
-                return context.getString(R.string.menu_filter);
-            case R.id.menu_refresh:
-                return context.getString(R.string.menu_refresh);
-            case R.id.menu_settings:
-                return context.getString(R.string.menu_settings);
-            case R.id.menu_search:
-                return context.getString(R.string.menu_search);
-
-        }
-        return Integer.toString(id);
+    
+    public static String idToName(Context context, int id) {
+        return context.getResources().getResourceEntryName(id);
     }
 
     @ColorInt

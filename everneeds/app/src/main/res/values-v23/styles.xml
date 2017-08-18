@@ -1,0 +1,15 @@
+<resources>
+
+  <style name="AppTheme" parent="AppTheme.Used">
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+  </style>
+
+  <style name="AppTheme.TransNav" parent="AppTheme.Used">
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:windowTranslucentNavigation">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+  </style>
+
+</resources>

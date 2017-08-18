@@ -140,7 +140,7 @@ public class PlanFragment extends BaseNavigationFragment {
 
     @Override
     protected int getOptionsMenuId() {
-        return R.menu.menu_plan_options;
+        return R.menu.nav_plan_options;
     }
 
     @Override

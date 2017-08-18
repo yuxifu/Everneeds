@@ -47,6 +47,7 @@ ext {
     smarttablayoutVersion = '1.6.1@aar'
     glideVersion = '3.7.0'
     circleimageviewVersion = '2.0.0'
+    sectionedRecyclerviewVersion = '0.5.0'
 }
 
 /*

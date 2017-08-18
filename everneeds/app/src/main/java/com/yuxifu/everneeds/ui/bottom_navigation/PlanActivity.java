@@ -70,7 +70,7 @@ public class PlanActivity extends BaseBottomNavActivity {
         if (coordinatorLayout != null) {
             Snackbar snackbar = Snackbar
                     .make(coordinatorLayout,
-                            ResourceHelper.idToTitle(PlanActivity.this, id) + textAppended,
+                            ResourceHelper.idToName(PlanActivity.this, id) + textAppended,
                             Snackbar.LENGTH_LONG)
                     .setAction("CONFIRM", new View.OnClickListener() {
                         @Override
@@ -87,7 +87,7 @@ public class PlanActivity extends BaseBottomNavActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_plan_options, menu);
+        getMenuInflater().inflate(R.menu.nav_plan_options, menu);
         return true;
     }
 

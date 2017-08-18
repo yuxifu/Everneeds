@@ -70,6 +70,7 @@ dependencies {
     implementation "com.ogaclejapan.smarttablayout:library:$rootProject.smarttablayoutVersion"
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     implementation "de.hdodenhof:circleimageview:$rootProject.circleimageviewVersion"
+    implementation "com.afollestad:sectioned-recyclerview:$rootProject.sectionedRecyclerviewVersion"
 
     // App's dependencies, including test
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"

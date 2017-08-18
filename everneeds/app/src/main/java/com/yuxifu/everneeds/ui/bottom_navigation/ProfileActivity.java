@@ -70,7 +70,7 @@ public class ProfileActivity extends BaseBottomNavActivity {
         if (coordinatorLayout != null) {
             Snackbar snackbar = Snackbar
                     .make(coordinatorLayout,
-                            ResourceHelper.idToTitle(ProfileActivity.this, id) + textAppended,
+                            ResourceHelper.idToName(ProfileActivity.this, id) + textAppended,
                             Snackbar.LENGTH_LONG)
                     .setAction("CONFIRM", new View.OnClickListener() {
                         @Override
@@ -87,7 +87,7 @@ public class ProfileActivity extends BaseBottomNavActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_profile_options, menu);
+        getMenuInflater().inflate(R.menu.nav_profile_options, menu);
         return true;
     }
 

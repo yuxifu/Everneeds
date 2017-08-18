@@ -161,9 +161,6 @@ public class MainActivity extends AppCompatActivity
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            default:
-                showSnackbarShortMessage(ResourceHelper.idToTitle(this, item.getItemId()));
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -220,6 +217,11 @@ public class MainActivity extends AppCompatActivity
         showSnackbar(snackbar);
     }
 
+    public void showSnackbarShortNotImplementedIdMessage(int id)
+    {
+        showSnackbarShortMessage("Not implemented: "+ ResourceHelper.idToName(this, id));
+    }
+
     //
     public void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
         AppCompatDelegate.setDefaultNightMode(nightMode);
@@ -243,10 +245,12 @@ public class MainActivity extends AppCompatActivity
         return value.data;
     }
 
+    // Communication with child fragment
     public void onFragmentInteraction(Uri uri) {
         //
     }
 
+    // Communication with child fragment
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
         showSnackbarShortMessage(item.content + " clicked");
     }

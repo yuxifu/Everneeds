@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,9 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.data._exp.Cheeses;
-import com.yuxifu.everneeds.ui._exp.CheeseRecyclerViewAdapter;
-import com.yuxifu.everneeds.util.CollectionHelper;
+import com.yuxifu.everneeds.ui.adapters.HomeSectionedRecyclerViewAdapter;
+import com.yuxifu.everneeds.util.ResourceHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +39,10 @@ public class HomeFragment extends BaseNavigationFragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    boolean mShowEmptySections = false;
+    boolean mShowFooters = true;
+    HomeSectionedRecyclerViewAdapter mRecyclerViewAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -98,9 +102,18 @@ public class HomeFragment extends BaseNavigationFragment {
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.setAdapter(new CheeseRecyclerViewAdapter(getActivity(),
-                CollectionHelper.getRandomSublist(Cheeses.sCheeseStrings, 50)));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        //recyclerView.setAdapter(new CheeseRecyclerViewAdapter(getActivity(),
+        //        CollectionHelper.getRandomSublist(Cheeses.sCheeseStrings, 50)));
+        mRecyclerViewAdapter = new HomeSectionedRecyclerViewAdapter();
+        GridLayoutManager manager =
+                new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_span));
+        recyclerView.setLayoutManager(manager);
+        mRecyclerViewAdapter.setLayoutManager(manager);
+        mRecyclerViewAdapter.shouldShowHeadersForEmptySections(mShowEmptySections);
+        mRecyclerViewAdapter.shouldShowFooters(mShowFooters);
+        mRecyclerViewAdapter.expandAllSections();
+        recyclerView.setAdapter(mRecyclerViewAdapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -154,7 +167,7 @@ public class HomeFragment extends BaseNavigationFragment {
 
     @Override
     protected int getOptionsMenuId() {
-        return R.menu.menu_home_options;
+        return R.menu.nav_home_options;
     }
 
     @Override
@@ -184,39 +197,81 @@ public class HomeFragment extends BaseNavigationFragment {
 
     @Override
     public void doPrepareOptionsMenu(Menu menu){
-        /*switch (AppCompatDelegate.getDefaultNightMode()) {
-            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
-                menu.findItem(R.id.menu_night_mode_system).setChecked(true);
-                break;
-            case AppCompatDelegate.MODE_NIGHT_AUTO:
-                menu.findItem(R.id.menu_night_mode_auto).setChecked(true);
-                break;
-            case AppCompatDelegate.MODE_NIGHT_YES:
-                menu.findItem(R.id.menu_night_mode_night).setChecked(true);
-                break;
-            case AppCompatDelegate.MODE_NIGHT_NO:
-                menu.findItem(R.id.menu_night_mode_day).setChecked(true);
-                break;
-        }*/
+        menu.findItem(R.id.home_options_show_empty_sections).setChecked(mShowEmptySections);
+        menu.findItem(R.id.home_options_show_footers).setChecked(mShowFooters);
+        super.doPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean doOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-            /*case R.id.menu_night_mode_system:
-                getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            case R.id.home_options_filter:
+                showFilteringPopUpMenu();
                 return true;
-            case R.id.menu_night_mode_day:
-                getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            case R.id.home_options_search:
+                //not implemented
+                getMainActivity().showSnackbarShortNotImplementedIdMessage(R.id.home_options_search);
+                return false;
+            case R.id.home_options_note:
+                //not implemented
+                getMainActivity().showSnackbarShortNotImplementedIdMessage(R.id.home_options_note);
+                return false;
+            case R.id.home_options_expand_all_sections:
+                mRecyclerViewAdapter.expandAllSections();
                 return true;
-            case R.id.menu_night_mode_night:
-                getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            case R.id.home_options_collapse_all_sections:
+                mRecyclerViewAdapter.collapseAllSections();
+                mRecyclerViewAdapter.shouldShowHeadersForEmptySections(mShowEmptySections);
                 return true;
-            case R.id.menu_night_mode_auto:
-                getMainActivity().setNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
-                return true;*/
+            case R.id.home_options_show_empty_sections:
+                mShowEmptySections = !mShowEmptySections;
+                mRecyclerViewAdapter.shouldShowHeadersForEmptySections(mShowEmptySections);
+                item.setChecked(mShowEmptySections);
+                return true;
+            case R.id.home_options_show_footers:
+                mShowFooters = !mShowFooters;
+                mRecyclerViewAdapter.shouldShowFooters(mShowFooters);
+                item.setChecked(mShowFooters);
+                return true;
+
+            default:
+                getMainActivity().showSnackbarShortMessage(
+                        ResourceHelper.idToName(getMainActivity(), item.getItemId()));
+
         }
         return false;
     }
+
+    public void showFilteringPopUpMenu() {
+        PopupMenu popup = new PopupMenu(getContext(), getActivity().findViewById(R.id.home_options_filter));
+        popup.getMenuInflater().inflate(R.menu.nav_home_filters, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home_filters_all:
+                        getMainActivity().showSnackbarShortNotImplementedIdMessage(R.id.home_filters_all);
+                        return false;
+                    case R.id.home_filters_reminders:
+                        getMainActivity().showSnackbarShortNotImplementedIdMessage(R.id.home_filters_reminders);
+                        return false;
+                    case R.id.home_filters_calendar:
+                        getMainActivity().showSnackbarShortNotImplementedIdMessage(R.id.home_filters_calendar);
+                        return false;
+                    case R.id.home_filters_todo:
+                        getMainActivity().showSnackbarShortNotImplementedIdMessage(R.id.home_filters_todo);
+                        return false;
+                    case R.id.home_filters_important_dates:
+                        getMainActivity().showSnackbarShortNotImplementedIdMessage(R.id.home_filters_important_dates);
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popup.show();
+    }
+
+
 }
 

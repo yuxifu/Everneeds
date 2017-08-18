@@ -90,6 +90,17 @@
     <string name="home_top_box_message">What\'s New</string>
 
     <!-- home fragment screen -->
+    <string name="home_options_filter">Filter</string>
+    <string name="home_options_search">Search</string>
     <string name="home_options_note">Notes</string>
+    <string name="home_options_expand_all_sections">Expand All</string>
+    <string name="home_options_collapse_all_sections">Collapse All</string>
+    <string name="home_options_show_empty_sections">Empty Sections</string>
+    <string name="home_options_show_footers">Footers</string>
+    <string name="home_filters_all">All</string>
+    <string name="home_filters_reminders">Reminders</string>
+    <string name="home_filters_calendar">Calendar Events</string>
+    <string name="home_filters_todo">To-Do Tasks</string>
+    <string name="home_filters_important_dates">Important Dates</string>
 
 </resources>
