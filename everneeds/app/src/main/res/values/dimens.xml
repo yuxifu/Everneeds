@@ -35,4 +35,6 @@
     <dimen name="content_inset_half">8dp</dimen>
     <dimen name="content_inset">16dp</dimen>
 
+    <dimen name="bottom_nav_tab_height">50dp</dimen>
+
 </resources>

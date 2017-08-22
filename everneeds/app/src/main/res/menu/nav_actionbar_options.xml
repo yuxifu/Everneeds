@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.yuxifu.everneeds.ui.bottom_navigation.HomeActivity">
+    <item
+        android:id="@+id/nav_actionbar_options_search"
+        android:title="@string/nav_actionbar_options_search"
+        android:icon="@drawable/ic_search_24dp"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/nav_actionbar_options_expand_all_sections"
+        android:title="@string/nav_actionbar_options_expand_all_sections"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/nav_actionbar_options_collapse_all_sections"
+        android:title="@string/nav_actionbar_options_collapse_all_sections"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/nav_actionbar_options_night_mode"
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/nav_actionbar_options_night_mode"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/nav_actionbar_options_about"
+        android:title="@string/nav_actionbar_options_about"
+        app:showAsAction="never"/>
+
+</menu>

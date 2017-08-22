@@ -33,6 +33,7 @@
     <color name="accent">#40C4FF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
+    <color name="green">#FF00FF00</color>
     <color name="black_20">#33000000</color>
     <color name="white_20">#33FFFFFF</color>
     <color name="transparent">#00000000</color>
@@ -55,5 +56,16 @@
     <color name="accent_purple">#FF9800</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
+
+    <!-- wechat theme -->
+    <color name="primary_wechat">#424242</color>
+    <color name="primary_dark_wechat">#212121</color>
+    <color name="accent_wechat">#00C853</color>
+
+    <!-- bottom navigation tabs -->
+    <color name="text_enabled">#00C853</color>
+    <color name="text_disabled">#FF999999</color>
+    <color name="icon_enabled">#00C853</color>
+    <color name="icon_disabled">#FF999999</color>
 
 </resources>

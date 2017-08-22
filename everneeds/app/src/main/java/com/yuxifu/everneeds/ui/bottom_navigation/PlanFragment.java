@@ -150,7 +150,7 @@ public class PlanFragment extends BaseNavigationFragment {
 
     @Override
     protected String getFragmentTitle() {
-        return getActivity().getString(R.string.nav_schedule_title);
+        return getActivity().getString(R.string.nav_plan_title);
     }
 
     @Override

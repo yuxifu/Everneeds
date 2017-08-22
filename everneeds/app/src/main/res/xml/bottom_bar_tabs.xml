@@ -5,19 +5,19 @@
         id="@+id/tab_home"
         title="@string/nav_home_title" />
     <tab
-        icon="@drawable/ic_schedule_black_24dp"
+        icon="@drawable/ic_main_schedule_outline_black"
         id="@+id/tab_plan"
-        title="@string/nav_schedule_title" />
+        title="@string/nav_plan_title" />
     <tab
-        icon="@drawable/ic_track_changes_black_24dp"
+        icon="@drawable/ic_main_track_outline_black"
         id="@+id/tab_track"
         title="@string/nav_track_title" />
     <tab
-        icon="@drawable/ic_compass_black_24dp"
+        icon="@drawable/ic_main_compass_outline_black"
         id="@+id/tab_discover"
         title="@string/nav_discover_title" />
     <tab
-        icon="@drawable/ic_person_outline_black_24dp"
+        icon="@drawable/ic_main_person_outline"
         id="@+id/tab_profile"
         title="@string/nav_profile_title" />
 </tabs>

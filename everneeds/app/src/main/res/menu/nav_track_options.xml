@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_track"
         android:title="@string/nav_track_title"
-        android:icon="@drawable/ic_track_changes"
+        android:icon="@drawable/ic_main_track_outline_black"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_filter"

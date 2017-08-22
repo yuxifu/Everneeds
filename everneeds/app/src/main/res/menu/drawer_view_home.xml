@@ -24,19 +24,19 @@
             android:title="@string/nav_home_title" />
         <item
             android:id="@+id/nav_plan"
-            android:icon="@drawable/ic_schedule_black_24dp"
-            android:title="@string/nav_schedule_title" />
+            android:icon="@drawable/ic_main_schedule_outline_black"
+            android:title="@string/nav_plan_title" />
         <item
             android:id="@+id/nav_track"
-            android:icon="@drawable/ic_track_changes_black_24dp"
+            android:icon="@drawable/ic_main_track_outline_black"
             android:title="@string/nav_track_title" />
         <item
             android:id="@+id/nav_discover"
-            android:icon="@drawable/ic_compass_black_24dp"
+            android:icon="@drawable/ic_main_compass_outline_black"
             android:title="@string/nav_discover_title" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_person_outline_black_24dp"
+            android:icon="@drawable/ic_main_person_outline"
             android:title="@string/nav_profile_title" />
     </group>
 
