@@ -1,4 +1,4 @@
-package com.yuxifu.everneeds.ui.bottom_navigation;
+package com.yuxifu.everneeds.ui.main;
 
 import android.content.res.Resources;
 import android.net.Uri;
@@ -23,10 +23,11 @@ import android.widget.TextView;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.ui._exp.CheeseListFragment;
 import com.yuxifu.everneeds.ui._exp.PlaceholderItemFragment;
 import com.yuxifu.everneeds.ui._exp.dummy.DummyContent;
 import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
+import com.yuxifu.everneeds.ui.categories.base.ProductNavigationFragment;
+import com.yuxifu.everneeds.ui.categories.plan.PlanNavigationFragment;
 import com.yuxifu.everneeds.util.ResourceHelper;
 
 /**
@@ -34,7 +35,8 @@ import com.yuxifu.everneeds.util.ResourceHelper;
  */
 
 public class Main2Activity extends AppCompatActivity implements
-        PlaceholderItemFragment.OnListFragmentInteractionListener {
+        PlaceholderItemFragment.OnListFragmentInteractionListener,
+        PlanNavigationFragment.OnFragmentInteractionListener {
 
     public static int[] navTabs() {
         return new int[]{
@@ -49,6 +51,7 @@ public class Main2Activity extends AppCompatActivity implements
     private Toolbar mToolbar;
     private ViewPager mViewPager;
     private SmartTabLayout mSmartLayout;
+    private Menu mOptionsMenu;
 
     @Override
     @CallSuper
@@ -74,7 +77,7 @@ public class Main2Activity extends AppCompatActivity implements
 
     private void setupViewPager(final ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CheeseListFragment(), getResources().getString(navTabs()[0]));
+        adapter.addFragment(new PlanNavigationFragment(), getResources().getString(navTabs()[0]));
         adapter.addFragment(PlaceholderItemFragment.newInstance(2), getResources().getString(navTabs()[1]));
         adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[2]));
         adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[3]));
@@ -89,6 +92,7 @@ public class Main2Activity extends AppCompatActivity implements
             @Override
             public void onPageSelected(int position) {
                 mToolbar.setTitle(navTabs()[position]);
+                UpdateOptionsMenuVisibility();
             }
 
             @Override
@@ -100,11 +104,9 @@ public class Main2Activity extends AppCompatActivity implements
         viewPager.addOnPageChangeListener(pageChangeListener);
 
         // do this in a runnable to make sure the viewPager's views are already instantiated before triggering the onPageSelected call
-        viewPager.post(new Runnable()
-        {
+        viewPager.post(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 pageChangeListener.onPageSelected(viewPager.getCurrentItem());
             }
         });
@@ -150,6 +152,7 @@ public class Main2Activity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        mOptionsMenu = menu;
         getMenuInflater().inflate(R.menu.nav_actionbar_options, menu);
         return true;
     }
@@ -167,13 +170,15 @@ public class Main2Activity extends AppCompatActivity implements
                 break;
         }
 
-        //hide collapse all/expand all for "me" tab
-        boolean profileTab = mViewPager.getCurrentItem()==3;
-        menu.findItem(R.id.nav_actionbar_options_collapse_all_sections).setVisible(!profileTab);
-        menu.findItem(R.id.nav_actionbar_options_expand_all_sections).setVisible(!profileTab);
-
         //
         return true;
+    }
+
+    private void UpdateOptionsMenuVisibility() {
+        Object obj = mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
+        boolean collapsible = obj instanceof ProductNavigationFragment;
+        mOptionsMenu.findItem(R.id.nav_actionbar_options_collapse_all_sections).setVisible(collapsible);
+        mOptionsMenu.findItem(R.id.nav_actionbar_options_expand_all_sections).setVisible(collapsible);
     }
 
     @Override
@@ -186,13 +191,31 @@ public class Main2Activity extends AppCompatActivity implements
                 item.setChecked(newNightMode);
                 break;
             case R.id.nav_actionbar_options_expand_all_sections:
+                ExpandAll();
+                break;
             case R.id.nav_actionbar_options_collapse_all_sections:
+                CollapseAll();
+                break;
             case R.id.nav_actionbar_options_about:
             case R.id.nav_actionbar_options_search:
                 showSnackbarShortNotImplementedIdMessage(id);
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void ExpandAll() {
+        Object obj = mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
+        if (obj instanceof ProductNavigationFragment) {
+            ((ProductNavigationFragment) obj).ExpandAll();
+        }
+    }
+
+    public void CollapseAll() {
+        Object obj = mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
+        if (obj instanceof ProductNavigationFragment) {
+            ((ProductNavigationFragment) obj).CollapseAll();
+        }
     }
 
     //
@@ -227,7 +250,7 @@ public class Main2Activity extends AppCompatActivity implements
         //params.setMargins(params.leftMargin, params.topMargin, params.rightMargin,
         //        mSmartLayout.getHeight());
         params.setMargins(params.leftMargin, params.topMargin, params.rightMargin,
-                        params.bottomMargin);
+                params.bottomMargin);
         snackbar.getView().setLayoutParams(params);
         snackbar.show();
     }
@@ -240,9 +263,8 @@ public class Main2Activity extends AppCompatActivity implements
         showSnackbar(snackbar);
     }
 
-    public void showSnackbarShortNotImplementedIdMessage(int id)
-    {
-        showSnackbarShortMessage("Not implemented: "+ ResourceHelper.idToName(this, id));
+    public void showSnackbarShortNotImplementedIdMessage(int id) {
+        showSnackbarShortMessage("Not implemented: " + ResourceHelper.idToName(this, id));
     }
 
     //

@@ -110,4 +110,8 @@
     <string name="nav_actionbar_options_night_mode">Night Mode</string>
     <string name="nav_actionbar_options_about">About</string>
 
+    <!-- custom_collapsible_view -->
+    <string name="custom_collapsible_view_image_icon_desc">Icon</string>
+    <string name="custom_collapsible_view_image_caret_desc">Collapse or Expand</string>
+
 </resources>

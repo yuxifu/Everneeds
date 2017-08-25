@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".ui.bottom_navigation.Main2Activity"
+            android:name=".ui.main.Main2Activity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -43,24 +43,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.bottom_navigation.HomeActivity" />
+        <activity android:name=".ui.main.HomeActivity" />
 
-        <activity android:name=".ui.bottom_navigation.PlanActivity" />
+        <activity android:name=".ui.main.PlanActivity" />
 
-        <activity android:name=".ui.bottom_navigation.TrackActivity" />
+        <activity android:name=".ui.main.TrackActivity" />
 
-        <activity android:name=".ui.bottom_navigation.DiscoverActivity" />
+        <activity android:name=".ui.main.DiscoverActivity" />
 
-        <activity android:name=".ui.bottom_navigation.ProfileActivity" />
+        <activity android:name=".ui.main.ProfileActivity" />
 
         <activity android:name=".ui._exp.CheeseDetailActivity"
-            android:parentActivityName=".ui.bottom_navigation.Main2Activity"
+            android:parentActivityName=".ui.main.Main2Activity"
             tools:ignore="UnusedAttribute">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.bottom_navigation.MainActivity" />
+                android:value=".ui.main.MainActivity" />
         </activity>
 
         <!-- todo list activities: keep for testing code to run -->

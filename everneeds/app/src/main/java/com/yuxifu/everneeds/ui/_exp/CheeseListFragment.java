@@ -31,21 +31,49 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.data._exp.Cheeses;
+import com.yuxifu.everneeds.ui.products.base.SampleProductCompactFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.data._exp.Cheeses;
-
 public class CheeseListFragment extends Fragment {
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM_NumItems = "numItems";
+    private static final String ARG_PARAM_NestedScrollingEnabled = "nestedScrollingEnabled";
+
+    // TODO: Rename and change types of parameters
+    private int mNunItems = 10;
+    private boolean mNestedScrollingEnabled = true;
+
+    public static SampleProductCompactFragment newInstance(int numItems, boolean nestedScrollingEnabled) {
+        SampleProductCompactFragment fragment = new SampleProductCompactFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PARAM_NumItems, numItems);
+        args.putBoolean(ARG_PARAM_NestedScrollingEnabled, nestedScrollingEnabled);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mNunItems = getArguments().getInt(ARG_PARAM_NumItems);
+            mNestedScrollingEnabled = getArguments().getBoolean(ARG_PARAM_NestedScrollingEnabled);
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView rv = (RecyclerView) inflater.inflate(
                 R.layout.fragment_cheese_list, container, false);
+        rv.setNestedScrollingEnabled(mNestedScrollingEnabled);
         setupRecyclerView(rv);
         return rv;
     }
@@ -53,7 +81,7 @@ public class CheeseListFragment extends Fragment {
     private void setupRecyclerView(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
-                getRandomSublist(Cheeses.sCheeseStrings, 30)));
+                getRandomSublist(Cheeses.sCheeseStrings, mNunItems)));
     }
 
     private List<String> getRandomSublist(String[] array, int amount) {

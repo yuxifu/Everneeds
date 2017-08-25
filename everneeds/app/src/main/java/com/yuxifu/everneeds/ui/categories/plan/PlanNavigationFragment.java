@@ -1,4 +1,4 @@
-package com.yuxifu.everneeds.ui.bottom_navigation;
+package com.yuxifu.everneeds.ui.categories.plan;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,19 +7,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.data.model.Product;
+import com.yuxifu.everneeds.data.model.ProductType;
+import com.yuxifu.everneeds.ui.categories.base.ProductNavigationFragment;
+import com.yuxifu.everneeds.ui.categories.base.ProductUI;
+import com.yuxifu.everneeds.ui.products.base.SampleProductCompactFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TrackFragment.OnFragmentInteractionListener} interface
+ * {@link PlanNavigationFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TrackFragment#newInstance} factory method to
+ * Use the {@link PlanNavigationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TrackFragment extends Fragment {
+public class PlanNavigationFragment extends ProductNavigationFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +38,7 @@ public class TrackFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TrackFragment() {
+    public PlanNavigationFragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +48,11 @@ public class TrackFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TrackFragment.
+     * @return A new instance of fragment PlanNavigationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TrackFragment newInstance(String param1, String param2) {
-        TrackFragment fragment = new TrackFragment();
+    public static PlanNavigationFragment newInstance(String param1, String param2) {
+        PlanNavigationFragment fragment = new PlanNavigationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,11 +72,7 @@ public class TrackFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_track, container, false);
-        TextView tv = v.findViewById(R.id.welcome_message);
-        tv.setText(mParam1);
-        return v;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -109,5 +112,46 @@ public class TrackFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    protected List<ProductUI> getProducts() {
+        List<ProductUI> productUis = new ArrayList<ProductUI>();
+
+        //products
+        Product calendar = new Product("Calendar", ProductType.Plan, "");
+        Product todoList = new Product("Todo List", ProductType.Plan, "");
+        Product wishList = new Product("Wish List", ProductType.Plan, "");
+        Product dates = new Product("Important Dates", ProductType.Plan, "");
+        Product weight = new Product("Weight", ProductType.Plan, "");
+        Product notepad = new Product("Notes", ProductType.Plan, "");
+
+        //UIs
+        productUis.add(new ProductUI(calendar, R.drawable.icons8_calendar_96,
+                SampleProductCompactFragment.newInstance(calendar.getTitle(), calendar.getType().toString()),
+                R.id.widget_container_calendar, null));
+
+        productUis.add(new ProductUI(todoList, R.drawable.icons8_to_do_96,
+                SampleProductCompactFragment.newInstance(todoList.getTitle(), todoList.getType().toString()),
+                R.id.widget_container_todo, null));
+
+        productUis.add(new ProductUI(wishList, R.drawable.wish_list_color,
+                SampleProductCompactFragment.newInstance(wishList.getTitle(), wishList.getType().toString()),
+                R.id.widget_container_wish, null));
+
+        productUis.add(new ProductUI(dates, R.drawable.icons8_wedding_day_96,
+                SampleProductCompactFragment.newInstance(dates.getTitle(), dates.getType().toString()),
+                R.id.widget_container_dates, null));
+
+        productUis.add(new ProductUI(weight, R.drawable.icons8_scale_96,
+                SampleProductCompactFragment.newInstance(weight.getTitle(), weight.getType().toString()),
+                R.id.widget_container_weight, null));
+
+        productUis.add(new ProductUI(notepad, R.drawable.icons8_note_96,
+                SampleProductCompactFragment.newInstance(notepad.getTitle(), notepad.getType().toString()),
+                R.id.widget_container_notepad, null));
+
+        //
+        return productUis;
     }
 }

@@ -1,4 +1,4 @@
-package com.yuxifu.everneeds.ui.bottom_navigation;
+package com.yuxifu.everneeds.ui.main;
 
 import android.content.Context;
 import android.os.Bundle;

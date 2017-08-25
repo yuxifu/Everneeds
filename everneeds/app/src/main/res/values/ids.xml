@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="widget_container_calendar" type="id"/>
+    <item name="widget_container_todo" type="id"/>
+    <item name="widget_container_wish" type="id"/>
+
+    <item name="widget_container_dates" type="id"/>
+    <item name="widget_container_weight" type="id"/>
+    <item name="widget_container_height" type="id"/>
+    <item name="widget_container_documents" type="id"/>
+    <item name="widget_container_projects" type="id"/>
+    <item name="widget_container_notepad" type="id"/>
+    <item name="widget_container_journal" type="id"/>
+    <item name="widget_container_emotion" type="id"/>
+
+    <item name="widget_container_contacts" type="id"/>
+    <item name="widget_container_location" type="id"/>
+    <item name="widget_container_chat" type="id"/>
+    <item name="widget_container_moments" type="id"/>
+
+</resources>

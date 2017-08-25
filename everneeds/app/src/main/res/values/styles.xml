@@ -19,7 +19,7 @@
 
     <style name="AppTheme.Used" parent="AppTheme.Wechat" />
 
-    <style name="AppTheme.TransNav" parent="AppTheme.Used"/>
+    <style name="AppTheme.TransNav" parent="AppTheme.Used" />
 
     <!-- theme wechat -->
     <style name="AppTheme.Wechat" parent="Theme.AppCompat.DayNight.NoActionBar">
@@ -67,6 +67,14 @@
         <item name="android:paddingRight">16dp</item>
         <item name="android:paddingTop">24dp</item>
         <item name="android:paddingBottom">24dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Widget.ProductContent" parent="android:Widget">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
         <item name="android:orientation">vertical</item>
     </style>
 

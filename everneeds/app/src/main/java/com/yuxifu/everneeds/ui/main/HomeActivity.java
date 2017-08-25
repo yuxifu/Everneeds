@@ -1,4 +1,4 @@
-package com.yuxifu.everneeds.ui.bottom_navigation;
+package com.yuxifu.everneeds.ui.main;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +19,7 @@ import com.yuxifu.everneeds.ui._exp.PlaceholderFragment;
 import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
 import com.yuxifu.everneeds.util.ResourceHelper;
 
-public class TrackActivity extends BaseBottomNavActivity {
+public class HomeActivity extends BaseBottomNavActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +39,20 @@ public class TrackActivity extends BaseBottomNavActivity {
     }
 
     public static void start(Activity activity) {
-        Intent intent = new Intent(activity.getApplicationContext(), TrackActivity.class);
+        Intent intent = new Intent(activity.getApplicationContext(), HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         activity.startActivity(intent);
     }
 
     public static Intent getStartIntent(Context context) { // if required in a service etc
-        Intent intent = new Intent(context, TrackActivity.class);
+        Intent intent = new Intent(context, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         return intent;
     }
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_track;
+        return R.layout.activity_home;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class TrackActivity extends BaseBottomNavActivity {
 
     @Override
     protected int getCurrentBottomNavBarTabId() {
-        return R.id.tab_track;
+        return R.id.tab_home;
     }
 
     private void showItemClicked(int id, String textAppended) {
@@ -70,7 +70,7 @@ public class TrackActivity extends BaseBottomNavActivity {
         if (coordinatorLayout != null) {
             Snackbar snackbar = Snackbar
                     .make(coordinatorLayout,
-                            ResourceHelper.idToName(TrackActivity.this, id) + textAppended,
+                            ResourceHelper.idToName(HomeActivity.this, id) + textAppended,
                             Snackbar.LENGTH_LONG)
                     .setAction("CONFIRM", new View.OnClickListener() {
                         @Override
@@ -87,7 +87,7 @@ public class TrackActivity extends BaseBottomNavActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.nav_track_options, menu);
+        getMenuInflater().inflate(R.menu.nav_home_options, menu);
         return true;
     }
 
@@ -109,7 +109,7 @@ public class TrackActivity extends BaseBottomNavActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new CheeseListFragment(), "Cheese");
-        adapter.addFragment(PlaceholderFragment.newInstance(2), "Track");
+        adapter.addFragment(PlaceholderFragment.newInstance(2), "Home");
         adapter.addFragment(PlaceholderFragment.newInstance(3), "Calendar");
         adapter.addFragment(PlaceholderFragment.newInstance(4), "Birthday");
         adapter.addFragment(PlaceholderFragment.newInstance(5), "Projects");

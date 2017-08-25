@@ -1,29 +1,25 @@
-package com.yuxifu.everneeds.ui.bottom_navigation;
+package com.yuxifu.everneeds.ui.main;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.ui._exp.CheeseListFragment;
-import com.yuxifu.everneeds.ui._exp.PlaceholderItemFragment;
-import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PlanFragment.OnFragmentInteractionListener} interface
+ * {@link ProfileFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PlanFragment#newInstance} factory method to
+ * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PlanFragment extends BaseNavigationFragment {
+public class ProfileFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,9 +30,8 @@ public class PlanFragment extends BaseNavigationFragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private ViewPager mViewPager;
 
-    public PlanFragment() {
+    public ProfileFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +41,11 @@ public class PlanFragment extends BaseNavigationFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PlanFragment.
+     * @return A new instance of fragment ProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlanFragment newInstance(String param1, String param2) {
-        PlanFragment fragment = new PlanFragment();
+    public static ProfileFragment newInstance(String param1, String param2) {
+        ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,22 +66,10 @@ public class PlanFragment extends BaseNavigationFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = super.onCreateView(inflater, container, savedInstanceState);
-
-        mViewPager  = rootView.findViewById(R.id.viewpager);
-        if (mViewPager != null) {
-            setupViewPager(mViewPager);
-        }
-
-        return rootView;
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new CheeseListFragment(), "Calendar");
-        adapter.addFragment(PlaceholderItemFragment.newInstance(2), "To-Do");
-        adapter.addFragment(PlaceholderItemFragment.newInstance(1), "Wish");
-        viewPager.setAdapter(adapter);
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        TextView tv = v.findViewById(R.id.welcome_message);
+        tv.setText(mParam1);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -127,60 +110,4 @@ public class PlanFragment extends BaseNavigationFragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-    @Override
-    protected int getFragmentLayoutId() {
-        return R.layout.fragment_plan;
-    }
-
-    @Override
-    protected int getNavigationViewMenuId() {
-        return R.menu.drawer_view_main;
-    }
-
-    @Override
-    protected int getOptionsMenuId() {
-        return R.menu.nav_plan_options;
-    }
-
-    @Override
-    protected ViewPager getViewPager() {
-        return mViewPager;
-    }
-
-    @Override
-    protected String getFragmentTitle() {
-        return getActivity().getString(R.string.nav_plan_title);
-    }
-
-    @Override
-    protected boolean useDrawerNavigation() {
-        return false;
-    }
-
-    @Override
-    protected boolean useSlidingTabs() {
-        return true;
-    }
-
-    @Override
-    protected boolean useOptionsMenu() {
-        return true;
-    }
-
-    /*@Override
-    public String getSlidingTabsTitle() {
-        return getFragmentTitle();
-    }
-    */
-
-    @Override
-    public boolean doOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            default:
-                break;
-        }
-        return false;
-    }
-
 }
