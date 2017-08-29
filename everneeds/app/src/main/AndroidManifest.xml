@@ -43,6 +43,7 @@
             </intent-filter>
         </activity>
 
+        <!--
         <activity android:name=".ui.main.HomeActivity" />
 
         <activity android:name=".ui.main.PlanActivity" />
@@ -57,15 +58,13 @@
             android:parentActivityName=".ui.main.Main2Activity"
             tools:ignore="UnusedAttribute">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity" />
-        </activity>
+        </activity> -->
 
         <!-- todo list activities: keep for testing code to run -->
         <activity android:name="._exp.todoapp.tasks.TasksActivity">
-
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

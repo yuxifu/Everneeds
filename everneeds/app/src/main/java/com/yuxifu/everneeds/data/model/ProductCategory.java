@@ -7,7 +7,7 @@ package com.yuxifu.everneeds.data.model;
 /**
  *
  */
-public enum ProductType {
+public enum ProductCategory {
     Plan,
     Track,
     Discover

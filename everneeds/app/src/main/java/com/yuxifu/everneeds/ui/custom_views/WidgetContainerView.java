@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
 
-public class CollapsibleView extends RelativeLayout implements View.OnClickListener {
+public class WidgetContainerView extends RelativeLayout implements View.OnClickListener {
 
     public TextView getmTitleTextView() {
         return mTitleTextView;
@@ -46,23 +46,23 @@ public class CollapsibleView extends RelativeLayout implements View.OnClickListe
 
     private boolean mCollapsed;
 
-    public CollapsibleView(Context context) {
+    public WidgetContainerView(Context context) {
         super(context);
         init();
     }
 
-    public CollapsibleView(Context context, AttributeSet attrs) {
+    public WidgetContainerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CollapsibleView(Context context, AttributeSet attrs, int defStyle) {
+    public WidgetContainerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
     private void init() {
-        inflate(getContext(), R.layout.custom_collapsible_view, this);
+        inflate(getContext(), R.layout.widget_container_view, this);
 
         //
         mHeader = findViewById(R.id.header);
@@ -70,7 +70,6 @@ public class CollapsibleView extends RelativeLayout implements View.OnClickListe
         mTitleTextView = findViewById(R.id.title);
         mCaretImageView = findViewById(R.id.caret);
         mFragmentFrameLayout = findViewById(R.id.content_container);
-        mPlaceholderContents = findViewById(R.id.placeholder_contents);
 
         //
         mCaretImageView.setClickable(true);

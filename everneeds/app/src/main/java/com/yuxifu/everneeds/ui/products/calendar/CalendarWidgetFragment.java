@@ -1,37 +1,22 @@
-package com.yuxifu.everneeds.ui.main;
+package com.yuxifu.everneeds.ui.products.calendar;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.ui.products.base.BaseProductWidgetFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DiscoverFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DiscoverFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class DiscoverFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class CalendarWidgetFragment extends BaseProductWidgetFragment {
+    private static final String ARG_PARAM_IS_COLLAPSED = "isCollapsed";
 
     private OnFragmentInteractionListener mListener;
 
-    public DiscoverFragment() {
+    public CalendarWidgetFragment() {
         // Required empty public constructor
     }
 
@@ -39,16 +24,14 @@ public class DiscoverFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DiscoverFragment.
+     * @param isCollapsed
+     * @return A new instance of fragment CalendarWidgetFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DiscoverFragment newInstance(String param1, String param2) {
-        DiscoverFragment fragment = new DiscoverFragment();
+    public static CalendarWidgetFragment newInstance(boolean isCollapsed) {
+        CalendarWidgetFragment fragment = new CalendarWidgetFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putBoolean(ARG_PARAM_IS_COLLAPSED, isCollapsed);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,19 +40,17 @@ public class DiscoverFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            collapsed = getArguments().getBoolean(ARG_PARAM_IS_COLLAPSED);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_discover, container, false);
-        TextView tv = v.findViewById(R.id.welcome_message);
-        tv.setText(mParam1);
-        return v;
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        TextView tv = getBodyView().findViewById(R.id.title);
+        tv.setText(getTitleResId());
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -109,5 +90,21 @@ public class DiscoverFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    // settings from subclasses
+    @Override
+    protected int getBodyViewId(){
+        return R.layout.widget_calendar;
+    }
+
+    @Override
+    protected int getIconResId(){
+        return R.drawable.icons8_calendar_96;
+    }
+
+    @Override
+    protected int getTitleResId() {
+        return R.string.product_widget_title_calendar;
     }
 }

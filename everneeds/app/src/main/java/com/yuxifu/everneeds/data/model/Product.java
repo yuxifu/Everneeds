@@ -12,48 +12,30 @@ import java.util.UUID;
 /**
  *
  */
-public class Product {
+public class Product extends Feature {
     @NonNull
-    private final String mId;
+    private final ProductCategory type;
+
+    private boolean on;
 
     @NonNull
-    private final ProductType mType;
+    public ProductCategory getType() {
+        return type;
+    }
 
-    @NonNull
-    private final String mTitle;
+    public boolean isOn() {
+        return on;
+    }
 
-    @Nullable
-    private final String mDescription;
-
-    private boolean mOn;
-
-    public Product(@NonNull String title, @NonNull ProductType type, @Nullable String description) {
+    public Product(@NonNull String title, @NonNull ProductCategory type, @Nullable String description) {
         this(UUID.randomUUID().toString(), title, type, description, true);
     }
 
-    public Product(@NonNull String id, @NonNull String title, @NonNull ProductType type,
+    private Product(@NonNull String id, @NonNull String title, @NonNull ProductCategory type,
                    @Nullable String description, boolean on) {
-        mId = id;
-        mType = type;
-        mTitle = title;
-        mDescription = description;
-        mOn = on;
-    }
-
-    public String getId() {
-        return mId;
-    }
-
-    public String getTitle() {
-        return mTitle;
-    }
-
-    public ProductType getType() {
-        return mType;
-    }
-
-    public String getDescription() {
-        return mDescription;
+        super(id, title, description);
+        this.type = type;
+        this.on = on;
     }
 
 }

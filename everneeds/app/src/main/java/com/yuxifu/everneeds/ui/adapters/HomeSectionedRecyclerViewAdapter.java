@@ -11,6 +11,9 @@ import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder;
 import com.yuxifu.everneeds.R;
 
+/**
+ * This is an example adapter for afollestad's sectioned recycle view
+ */
 public class HomeSectionedRecyclerViewAdapter
         extends SectionedRecyclerViewAdapter<HomeSectionedRecyclerViewAdapter.MainVH> {
 

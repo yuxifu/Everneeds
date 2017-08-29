@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.yuxifu.everneeds.ui.main.DiscoverActivity">
+    tools:context="com.yuxifu.everneeds.ui.main._exp.DiscoverActivity">
     <item
         android:id="@+id/menu_discover"
         android:title="@string/nav_discover_title"

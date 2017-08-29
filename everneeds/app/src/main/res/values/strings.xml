@@ -110,8 +110,30 @@
     <string name="nav_actionbar_options_night_mode">Night Mode</string>
     <string name="nav_actionbar_options_about">About</string>
 
-    <!-- custom_collapsible_view -->
+    <!-- product_widget_container_viewview -->
     <string name="custom_collapsible_view_image_icon_desc">Icon</string>
     <string name="custom_collapsible_view_image_caret_desc">Collapse or Expand</string>
+
+    <!-- product widget -->
+    <string name="product_widget_title_placeholder">Title</string>
+    <string name="product_widget_image_icon_desc">Icon</string>
+    <string name="product_widget_image_caret_desc">Collapse or Expand</string>
+
+    <!-- product titles -->
+    <string name="product_widget_title_calendar">Calendar</string>
+    <string name="product_widget_title_todo">To-Do List</string>
+    <string name="product_widget_title_wish">Wish List</string>
+    <string name="product_widget_title_dates">Important Dates</string>
+    <string name="product_widget_title_weight">Weight</string>
+    <string name="product_widget_title_height">Height</string>
+    <string name="product_widget_title_documents">Documents</string>
+    <string name="product_widget_title_projects">Projects</string>
+    <string name="product_widget_title_notepad">Notepad</string>
+    <string name="product_widget_title_journal">Journal</string>
+    <string name="product_widget_title_emotion">Emotion</string>
+    <string name="product_widget_title_contacts">Contacts</string>
+    <string name="product_widget_title_location">Location</string>
+    <string name="product_widget_title_chat">Chat</string>
+    <string name="product_widget_title_moments">Moments</string>
 
 </resources>

@@ -26,15 +26,15 @@ import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui._exp.PlaceholderItemFragment;
 import com.yuxifu.everneeds.ui._exp.dummy.DummyContent;
 import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
-import com.yuxifu.everneeds.ui.categories.base.ProductNavigationFragment;
 import com.yuxifu.everneeds.ui.categories.plan.PlanNavigationFragment;
+import com.yuxifu.everneeds.ui.products.calendar.CalendarWidgetFragment;
 import com.yuxifu.everneeds.util.ResourceHelper;
 
 /**
- * Created by Yuxi on 8/7/17.
+ * Main entrance of the application.  Main activity
  */
-
 public class Main2Activity extends AppCompatActivity implements
+        CalendarWidgetFragment.OnFragmentInteractionListener,
         PlaceholderItemFragment.OnListFragmentInteractionListener,
         PlanNavigationFragment.OnFragmentInteractionListener {
 
@@ -47,11 +47,8 @@ public class Main2Activity extends AppCompatActivity implements
         };
     }
 
-    private CoordinatorLayout mCoordinatorLayout;
-    private Toolbar mToolbar;
-    private ViewPager mViewPager;
-    private SmartTabLayout mSmartLayout;
-    private Menu mOptionsMenu;
+    private CoordinatorLayout coordinatorLayout;
+    private Toolbar toolbar;
 
     @Override
     @CallSuper
@@ -60,19 +57,19 @@ public class Main2Activity extends AppCompatActivity implements
         setContentView(R.layout.activity_main2);
 
         //
-        mCoordinatorLayout = findViewById(R.id.main_content);
+        coordinatorLayout = findViewById(R.id.main_content);
 
         // Toolbar
-        mToolbar = findViewById(R.id.main_toolbar);
-        setSupportActionBar(mToolbar);
+        toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
-        mViewPager = findViewById(R.id.main_viewpager);
-        setupViewPager(mViewPager);
+        ViewPager viewPager = findViewById(R.id.main_viewpager);
+        setupViewPager(viewPager);
 
-        mSmartLayout = findViewById(R.id.main_bottom_tab);
-        setupNavigationTabs(mSmartLayout);
+        SmartTabLayout smartLayout = findViewById(R.id.main_bottom_tab);
+        setupNavigationTabs(smartLayout);
 
-        mSmartLayout.setViewPager(mViewPager);
+        smartLayout.setViewPager(viewPager);
     }
 
     private void setupViewPager(final ViewPager viewPager) {
@@ -91,8 +88,7 @@ public class Main2Activity extends AppCompatActivity implements
 
             @Override
             public void onPageSelected(int position) {
-                mToolbar.setTitle(navTabs()[position]);
-                UpdateOptionsMenuVisibility();
+                toolbar.setTitle(navTabs()[position]);
             }
 
             @Override
@@ -103,7 +99,8 @@ public class Main2Activity extends AppCompatActivity implements
 
         viewPager.addOnPageChangeListener(pageChangeListener);
 
-        // do this in a runnable to make sure the viewPager's views are already instantiated before triggering the onPageSelected call
+        // do this in a runnable to make sure the viewPager's views are already instantiated
+        // before triggering the onPageSelected call
         viewPager.post(new Runnable() {
             @Override
             public void run() {
@@ -123,8 +120,8 @@ public class Main2Activity extends AppCompatActivity implements
                 View v = inflater.inflate(R.layout.custom_tab_icon_and_text, container,
                         false);
 
-                ImageView icon = (ImageView) v.findViewById(R.id.custom_tab_icon);
-                TextView text = (TextView) v.findViewById(R.id.custom_tab_text);
+                ImageView icon = v.findViewById(R.id.custom_tab_icon);
+                TextView text = v.findViewById(R.id.custom_tab_text);
                 switch (position) {
                     case 0:     //schedule/plan
                         icon.setImageDrawable(res.getDrawable(R.drawable.ic_main_schedule_selector));
@@ -152,7 +149,6 @@ public class Main2Activity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        mOptionsMenu = menu;
         getMenuInflater().inflate(R.menu.nav_actionbar_options, menu);
         return true;
     }
@@ -174,13 +170,6 @@ public class Main2Activity extends AppCompatActivity implements
         return true;
     }
 
-    private void UpdateOptionsMenuVisibility() {
-        Object obj = mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
-        boolean collapsible = obj instanceof ProductNavigationFragment;
-        mOptionsMenu.findItem(R.id.nav_actionbar_options_collapse_all_sections).setVisible(collapsible);
-        mOptionsMenu.findItem(R.id.nav_actionbar_options_expand_all_sections).setVisible(collapsible);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -190,32 +179,12 @@ public class Main2Activity extends AppCompatActivity implements
                 setNightMode(newNightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
                 item.setChecked(newNightMode);
                 break;
-            case R.id.nav_actionbar_options_expand_all_sections:
-                ExpandAll();
-                break;
-            case R.id.nav_actionbar_options_collapse_all_sections:
-                CollapseAll();
-                break;
             case R.id.nav_actionbar_options_about:
             case R.id.nav_actionbar_options_search:
                 showSnackbarShortNotImplementedIdMessage(id);
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void ExpandAll() {
-        Object obj = mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
-        if (obj instanceof ProductNavigationFragment) {
-            ((ProductNavigationFragment) obj).ExpandAll();
-        }
-    }
-
-    public void CollapseAll() {
-        Object obj = mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
-        if (obj instanceof ProductNavigationFragment) {
-            ((ProductNavigationFragment) obj).CollapseAll();
-        }
     }
 
     //
@@ -240,15 +209,13 @@ public class Main2Activity extends AppCompatActivity implements
     }
 
     public Toolbar getToolbar() {
-        return mToolbar;
+        return toolbar;
     }
 
 
     public void showSnackbar(Snackbar snackbar) {
         CoordinatorLayout.LayoutParams params
                 = (CoordinatorLayout.LayoutParams) snackbar.getView().getLayoutParams();
-        //params.setMargins(params.leftMargin, params.topMargin, params.rightMargin,
-        //        mSmartLayout.getHeight());
         params.setMargins(params.leftMargin, params.topMargin, params.rightMargin,
                 params.bottomMargin);
         snackbar.getView().setLayoutParams(params);
@@ -257,7 +224,7 @@ public class Main2Activity extends AppCompatActivity implements
 
     public void showSnackbarShortMessage(CharSequence message) {
         Snackbar snackbar = Snackbar
-                .make(mCoordinatorLayout,
+                .make(coordinatorLayout,
                         message,
                         Snackbar.LENGTH_SHORT);
         showSnackbar(snackbar);
@@ -293,7 +260,7 @@ public class Main2Activity extends AppCompatActivity implements
 
     // Communication with child fragment
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
+        showSnackbarShortMessage(item.content);
     }
 
     //

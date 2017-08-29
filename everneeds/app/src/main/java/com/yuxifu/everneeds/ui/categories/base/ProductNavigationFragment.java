@@ -8,12 +8,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.ui.custom_views.CollapsibleView;
+import com.yuxifu.everneeds.ui.products.base.BaseProductWidgetFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class ProductNavigationFragment extends Fragment {
+public abstract class ProductNavigationFragment extends Fragment  {
 
     NestedScrollView mNestedScrollView;
     LinearLayout mLinearLayout;
@@ -33,61 +37,138 @@ public abstract class ProductNavigationFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View main_view = inflater.inflate(R.layout.fragment_product_navigation, container, false);
-        mNestedScrollView = main_view.findViewById(R.id.top_nested_scroll_view);
-        mLinearLayout = main_view.findViewById(R.id.main_linear_layout);
-        addProductViews();
-        return main_view;
+        super.onCreateView(inflater, container, savedInstanceState);
+        View mainView = inflater.inflate(R.layout.fragment_product_navigation, container, false);
+        mNestedScrollView = mainView.findViewById(R.id.top_nested_scroll_view);
+        mLinearLayout = mainView.findViewById(R.id.main_linear_layout);
+        addProductWidgets(inflater);
+        return mainView;
     }
 
-    private List<CollapsibleView> mCollapsibleViews;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
-    protected void addProductViews() {
-        if (mCollapsibleViews == null) {
-            mCollapsibleViews = new ArrayList<CollapsibleView>();
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.nav_actionbar_collapse_expand_options, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.nav_actionbar_options_expand_all_sections:
+                ExpandAll();
+                return true;
+            case R.id.nav_actionbar_options_collapse_all_sections:
+                CollapseAll();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    private List<Fragment> productWidgetFragments;
+
+    protected void addProductWidgets(LayoutInflater inflater) {
+        if (productWidgetFragments == null) {
+            productWidgetFragments = new ArrayList<Fragment>();
         } else {
-            mCollapsibleViews.clear();
+            productWidgetFragments.clear();
         }
 
         FragmentManager fm = getChildFragmentManager();
         List<ProductUI> products = getProducts();
         for (ProductUI item : products) {
-            CollapsibleView cv = new CollapsibleView(getContext());
-            cv.getmIconImageView().setImageResource(item.getmIconImageId());
-            cv.getmTitleTextView().setText(item.getmProduct().getTitle());
-            cv.getmFragmentFrameLayout().setId(item.getmContainerId());
+            View container = inflater.inflate(R.layout.widget_container_view, mLinearLayout, true);
+            FrameLayout fragmentContainer = container.findViewById(R.id.content_container);
+            int fragmentId = item.getmContainerId();
+            fragmentContainer.setId(fragmentId);
 
             //add product fragment
-            cv.getmPlaceholderContents().setVisibility(View.GONE);
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(item.getmContainerId(), item.getmFragment());
-            ft.commit();
+            Fragment fragment = fm.findFragmentById(fragmentId);
+            if (fragment == null) {
+                fragment = item.getmFragment();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(fragmentId, fragment);
+                ft.commit();
+            }
 
             //
-            mLinearLayout.addView(cv);
-            mCollapsibleViews.add(cv);
+            UpdateExpandCollapseAll();
+            productWidgetFragments.add(fragment);
         }
     }
 
     protected abstract List<ProductUI> getProducts();
 
     public void ExpandAll() {
-        if (mCollapsibleViews != null) {
-            for (CollapsibleView cv : mCollapsibleViews) {
-                cv.Expand();
+        if (productWidgetFragments != null) {
+            for (Fragment widget : productWidgetFragments) {
+                if (widget instanceof BaseProductWidgetFragment)
+                    ((BaseProductWidgetFragment) widget).Expand();
             }
         }
     }
 
     public void CollapseAll() {
-        if (mCollapsibleViews != null) {
-            for (CollapsibleView cv : mCollapsibleViews) {
-                cv.Collapse();
+        if (productWidgetFragments != null) {
+            for (Fragment widget : productWidgetFragments) {
+                if (widget instanceof BaseProductWidgetFragment)
+                    ((BaseProductWidgetFragment) widget).Collapse();
+            }
+        }
+    }
+
+    public void UpdateExpandCollapseAll() {
+        if (productWidgetFragments != null) {
+            for (Fragment widget : productWidgetFragments) {
+                if (widget instanceof BaseProductWidgetFragment)
+                    ((BaseProductWidgetFragment) widget).UpdateCollapsingIconAndView();
             }
         }
     }

@@ -1,0 +1,1 @@
+Contents under **_templates** are for learning or used as code templates.  Not part of the project.  

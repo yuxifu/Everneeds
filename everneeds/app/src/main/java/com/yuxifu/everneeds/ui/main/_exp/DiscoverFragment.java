@@ -1,4 +1,4 @@
-package com.yuxifu.everneeds.ui.main;
+package com.yuxifu.everneeds.ui.main._exp;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,12 +14,12 @@ import com.yuxifu.everneeds.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TrackFragment.OnFragmentInteractionListener} interface
+ * {@link DiscoverFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TrackFragment#newInstance} factory method to
+ * Use the {@link DiscoverFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TrackFragment extends Fragment {
+public class DiscoverFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +31,7 @@ public class TrackFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TrackFragment() {
+    public DiscoverFragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +41,11 @@ public class TrackFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TrackFragment.
+     * @return A new instance of fragment DiscoverFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TrackFragment newInstance(String param1, String param2) {
-        TrackFragment fragment = new TrackFragment();
+    public static DiscoverFragment newInstance(String param1, String param2) {
+        DiscoverFragment fragment = new DiscoverFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,7 +66,7 @@ public class TrackFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_track, container, false);
+        View v = inflater.inflate(R.layout.fragment_discover, container, false);
         TextView tv = v.findViewById(R.id.welcome_message);
         tv.setText(mParam1);
         return v;
