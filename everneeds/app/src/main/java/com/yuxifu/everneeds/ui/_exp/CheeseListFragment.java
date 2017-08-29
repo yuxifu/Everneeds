@@ -33,7 +33,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.data._exp.Cheeses;
-import com.yuxifu.everneeds.ui.products.base.SampleProductCompactFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +49,8 @@ public class CheeseListFragment extends Fragment {
     private int mNunItems = 10;
     private boolean mNestedScrollingEnabled = true;
 
-    public static SampleProductCompactFragment newInstance(int numItems, boolean nestedScrollingEnabled) {
-        SampleProductCompactFragment fragment = new SampleProductCompactFragment();
+    public static CheeseListFragment newInstance(int numItems, boolean nestedScrollingEnabled) {
+        CheeseListFragment fragment = new CheeseListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM_NumItems, numItems);
         args.putBoolean(ARG_PARAM_NestedScrollingEnabled, nestedScrollingEnabled);

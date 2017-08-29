@@ -33,7 +33,7 @@ import com.yuxifu.everneeds.util.ResourceHelper;
 /**
  * Main entrance of the application.  Main activity
  */
-public class Main2Activity extends AppCompatActivity implements
+public class MainActivity extends AppCompatActivity implements
         CalendarWidgetFragment.OnFragmentInteractionListener,
         PlaceholderItemFragment.OnListFragmentInteractionListener,
         PlanNavigationFragment.OnFragmentInteractionListener {
@@ -54,7 +54,7 @@ public class Main2Activity extends AppCompatActivity implements
     @CallSuper
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
 
         //
         coordinatorLayout = findViewById(R.id.main_content);

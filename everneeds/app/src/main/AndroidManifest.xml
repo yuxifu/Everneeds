@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".ui.main.Main2Activity"
+            android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -42,26 +42,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <!--
-        <activity android:name=".ui.main.HomeActivity" />
-
-        <activity android:name=".ui.main.PlanActivity" />
-
-        <activity android:name=".ui.main.TrackActivity" />
-
-        <activity android:name=".ui.main.DiscoverActivity" />
-
-        <activity android:name=".ui.main.ProfileActivity" />
-
-        <activity android:name=".ui._exp.CheeseDetailActivity"
-            android:parentActivityName=".ui.main.Main2Activity"
-            tools:ignore="UnusedAttribute">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
-        </activity> -->
 
         <!-- todo list activities: keep for testing code to run -->
         <activity android:name="._exp.todoapp.tasks.TasksActivity">

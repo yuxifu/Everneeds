@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.ui.main.Main2Activity;
+import com.yuxifu.everneeds.ui.main.MainActivity;
 
 public abstract class BaseProductWidgetFragment extends Fragment implements View.OnClickListener {
 
@@ -144,8 +144,8 @@ public abstract class BaseProductWidgetFragment extends Fragment implements View
     protected abstract int getTitleResId();
 
     // Get parent activity
-    public Main2Activity getMainActivity() {
-        return (Main2Activity) getActivity();
+    public MainActivity getMainActivity() {
+        return (MainActivity) getActivity();
     }
 
     public void UpdateCollapsingIconAndView() {
