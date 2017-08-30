@@ -71,10 +71,11 @@
     the big cheese.</string>
 
     <string name="nav_home_title">Home</string>
-    <string name="nav_plan_title">Plan</string>
+    <string name="nav_note_title">Note</string>
+    <string name="nav_plan_title">Schedule</string>
     <string name="nav_track_title">Track</string>
     <string name="nav_discover_title">Discover</string>
-    <string name="nav_profile_title">Me</string>
+    <string name="nav_more_title">More</string>
 
     <string name="sliding_tabs_title">Tabs</string>
 

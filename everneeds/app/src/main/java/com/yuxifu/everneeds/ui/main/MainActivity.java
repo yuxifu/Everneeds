@@ -40,10 +40,12 @@ public class MainActivity extends AppCompatActivity implements
 
     public static int[] navTabs() {
         return new int[]{
+                R.string.nav_home_title,
+                R.string.nav_note_title,
                 R.string.nav_plan_title,
                 R.string.nav_track_title,
                 R.string.nav_discover_title,
-                R.string.nav_profile_title
+                R.string.nav_more_title
         };
     }
 
@@ -74,10 +76,13 @@ public class MainActivity extends AppCompatActivity implements
 
     private void setupViewPager(final ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PlanNavigationFragment(), getResources().getString(navTabs()[0]));
-        adapter.addFragment(PlaceholderItemFragment.newInstance(2), getResources().getString(navTabs()[1]));
-        adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[2]));
-        adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[3]));
+
+        adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[0]));
+        adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[1]));
+        adapter.addFragment(new PlanNavigationFragment(), getResources().getString(navTabs()[2]));
+        adapter.addFragment(PlaceholderItemFragment.newInstance(2), getResources().getString(navTabs()[3]));
+        adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[4]));
+        adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[5]));
         viewPager.setAdapter(adapter);
 
         final ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -88,7 +93,12 @@ public class MainActivity extends AppCompatActivity implements
 
             @Override
             public void onPageSelected(int position) {
-                toolbar.setTitle(navTabs()[position]);
+                if (position == 0) {
+                    toolbar.setTitle(R.string.app_name);
+                }
+                else {   //display app name at the "home" page
+                    toolbar.setTitle(navTabs()[position]);
+                }
             }
 
             @Override
@@ -123,21 +133,29 @@ public class MainActivity extends AppCompatActivity implements
                 ImageView icon = v.findViewById(R.id.custom_tab_icon);
                 TextView text = v.findViewById(R.id.custom_tab_text);
                 switch (position) {
-                    case 0:     //schedule/plan
+                    case 0:     //home
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_main_home_selector));
+                        text.setText(navTabs()[position]);
+                        break;
+                    case 1:     //home
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_main_note_selector));
+                        text.setText(navTabs()[position]);
+                        break;
+                    case 2:     //schedule/plan
                         icon.setImageDrawable(res.getDrawable(R.drawable.ic_main_schedule_selector));
-                        text.setText(navTabs()[0]);
+                        text.setText(navTabs()[position]);
                         break;
-                    case 1:     //track
+                    case 3:     //track
                         icon.setImageDrawable(res.getDrawable(R.drawable.ic_main_track_selector));
-                        text.setText(navTabs()[1]);
+                        text.setText(navTabs()[position]);
                         break;
-                    case 2:     //discover
+                    case 4:     //discover
                         icon.setImageDrawable(res.getDrawable(R.drawable.ic_main_compass_selector));
-                        text.setText(navTabs()[2]);
+                        text.setText(navTabs()[position]);
                         break;
-                    case 3:     //profile
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_main_person_selector));
-                        text.setText(navTabs()[3]);
+                    case 5:     //more
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_main_more_selector));
+                        text.setText(navTabs()[position]);
                         break;
                     default:    //
                         throw new IllegalStateException("Invalid position: " + position);
