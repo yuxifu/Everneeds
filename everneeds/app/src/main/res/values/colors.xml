@@ -72,4 +72,7 @@
     <color name="product_widget_header_background">#33000000</color>
     <color name="product_widget_background">#33000000</color>
 
+    <!-- More page divider color -->
+    <color name="list_divider_default_color_light_grey">#10000000</color>
+
 </resources>

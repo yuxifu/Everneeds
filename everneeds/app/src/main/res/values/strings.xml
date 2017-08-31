@@ -137,4 +137,13 @@
     <string name="product_widget_title_chat">Chat</string>
     <string name="product_widget_title_moments">Moments</string>
 
+    <!-- content description/placeholder -->
+    <string name="image_view_content_description">Image</string>
+    <string name="text_view_text">Text</string>
+
+    <!-- More page titles -->
+    <string name="settings_list_item_title">Settings</string>
+    <string name="statistics_list_item_title">Statistics</string>
+    <string name="favorites_list_item_title">Favorites</string>
+
 </resources>

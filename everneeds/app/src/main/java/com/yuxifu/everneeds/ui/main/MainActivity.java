@@ -26,6 +26,7 @@ import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui._exp.PlaceholderItemFragment;
 import com.yuxifu.everneeds.ui._exp.dummy.DummyContent;
 import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
+import com.yuxifu.everneeds.ui.categories.more.MoreNavigationFragment;
 import com.yuxifu.everneeds.ui.categories.plan.PlanNavigationFragment;
 import com.yuxifu.everneeds.ui.products.calendar.CalendarWidgetFragment;
 import com.yuxifu.everneeds.util.ResourceHelper;
@@ -36,7 +37,8 @@ import com.yuxifu.everneeds.util.ResourceHelper;
 public class MainActivity extends AppCompatActivity implements
         CalendarWidgetFragment.OnFragmentInteractionListener,
         PlaceholderItemFragment.OnListFragmentInteractionListener,
-        PlanNavigationFragment.OnFragmentInteractionListener {
+        PlanNavigationFragment.OnFragmentInteractionListener,
+        MoreNavigationFragment.OnFragmentInteractionListener {
 
     public static int[] navTabs() {
         return new int[]{
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements
         adapter.addFragment(new PlanNavigationFragment(), getResources().getString(navTabs()[2]));
         adapter.addFragment(PlaceholderItemFragment.newInstance(2), getResources().getString(navTabs()[3]));
         adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[4]));
-        adapter.addFragment(PlaceholderItemFragment.newInstance(1), getResources().getString(navTabs()[5]));
+        adapter.addFragment(new MoreNavigationFragment(), getResources().getString(navTabs()[5]));
         viewPager.setAdapter(adapter);
 
         final ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {

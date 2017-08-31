@@ -1,0 +1,30 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yuxifu.everneeds.ui.categories.more.MoreNavigationFragment">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--  a divider will be inserted here programmatically  -->
+
+        <com.yuxifu.everneeds.ui.custom_views.ColorOptionsView
+            android:id="@+id/color_option"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:background="?android:selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            custom:titleText="Background color"
+            custom:valueColor="@color/colorRed" />
+
+        <!--  dividers and more items will be appended here programmatically  -->
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

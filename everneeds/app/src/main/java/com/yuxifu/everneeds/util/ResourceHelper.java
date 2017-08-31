@@ -16,6 +16,14 @@ public final class ResourceHelper {
         return context.getResources().getResourceEntryName(id);
     }
 
+    public static String getString(Context context, int id) {
+        return context.getResources().getString(id);
+    }
+
+    public static float getDimension(Context context, int id) {
+        return context.getResources().getDimension(id);
+    }
+
     @ColorInt
     public static int getThemeColor
             (
@@ -25,6 +33,13 @@ public final class ResourceHelper {
         final TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(attributeColor, value, true);
         return value.data;
+    }
+
+    public static int dpToPx(Context context, float dp) {
+        float density = context.getResources()
+                .getDisplayMetrics()
+                .density;
+        return Math.round((float) dp * density);
     }
 
 }

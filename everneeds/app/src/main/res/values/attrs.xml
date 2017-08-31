@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="titleText" format="reference|string" localization="suggested" />
+
+    <declare-styleable name="ColorOptionsView">
+        <attr name="titleText" localization="suggested" />
+        <attr name="valueColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ImageTitleImageListItemView">
+        <attr name="titleText" localization="suggested" />
+        <attr name="firstImageSrc" format="reference" />
+        <attr name="secondImageSrc" format="reference" />
+        <attr name="secondImageOn" format="boolean" />
+    </declare-styleable>
+
+</resources>

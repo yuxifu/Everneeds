@@ -45,4 +45,12 @@
     <!-- product widget -->
     <dimen name="product_widget_header_height">40dp</dimen>
 
+    <!-- default_list_divider -->
+    <dimen name="list_divider_default_thickness_thick">20dp</dimen>
+    <dimen name="list_divider_default_thickness_thin">1dp</dimen>
+
+    <!-- ImageTitleImageListItemView -->
+    <dimen name="image_title_image_list_item_height">40dp</dimen>
+    <dimen name="image_title_image_list_item_horizontal_margin">24dp</dimen>
+
 </resources>

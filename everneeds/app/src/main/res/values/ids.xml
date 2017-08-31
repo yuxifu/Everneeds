@@ -18,4 +18,8 @@
     <item name="widget_container_chat" type="id"/>
     <item name="widget_container_moments" type="id"/>
 
+    <item name="list_item_settings" type="id"/>
+    <item name="list_item_statistics" type="id"/>
+    <item name="list_item_favorites" type="id"/>
+
 </resources>
