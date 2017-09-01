@@ -14,6 +14,7 @@ import com.yuxifu.everneeds.data.model.ProductCategory;
 import com.yuxifu.everneeds.ui.categories.base.ProductNavigationFragment;
 import com.yuxifu.everneeds.ui.categories.base.ProductUI;
 import com.yuxifu.everneeds.ui.products.calendar.CalendarWidgetFragment;
+import com.yuxifu.everneeds.ui.products.todolist.TodoWidgetFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,8 +121,8 @@ public class PlanNavigationFragment extends ProductNavigationFragment {
 
         //products
         Product calendar = new Product("Calendar", ProductCategory.Plan, "");
-        /*Product todoList = new Product("Todo List", ProductCategory.Plan, "");
-        Product wishList = new Product("Wish List", ProductCategory.Plan, "");
+        Product todoList = new Product("Todo List", ProductCategory.Plan, "");
+   /*     Product wishList = new Product("Wish List", ProductCategory.Plan, "");
         Product dates = new Product("Important Dates", ProductCategory.Plan, "");
         Product weight = new Product("Weight", ProductCategory.Plan, "");
         Product notepad = new Product("Notes", ProductCategory.Plan, "");
@@ -131,10 +132,10 @@ public class PlanNavigationFragment extends ProductNavigationFragment {
                 new CalendarWidgetFragment(),
                 R.id.widget_container_calendar, null));
 
-  /*      productUis.add(new ProductUI(todoList, R.drawable.icons8_to_do_96,
-                SampleProductCompactFragment.newInstance(todoList.getTitle(), todoList.getType().toString()),
+        productUis.add(new ProductUI(todoList, R.drawable.icons8_to_do_96,
+                new TodoWidgetFragment(),
                 R.id.widget_container_todo, null));
-
+/*
         productUis.add(new ProductUI(wishList, R.drawable.wish_list_color,
                 SampleProductCompactFragment.newInstance(wishList.getTitle(), wishList.getType().toString()),
                 R.id.widget_container_wish, null));

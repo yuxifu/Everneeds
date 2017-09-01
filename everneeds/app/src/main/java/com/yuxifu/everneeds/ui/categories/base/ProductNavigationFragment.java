@@ -139,7 +139,6 @@ public abstract class ProductNavigationFragment extends Fragment  {
             }
 
             //
-            UpdateExpandCollapseAll();
             productWidgetFragments.add(fragment);
         }
     }
@@ -160,15 +159,6 @@ public abstract class ProductNavigationFragment extends Fragment  {
             for (Fragment widget : productWidgetFragments) {
                 if (widget instanceof BaseProductWidgetFragment)
                     ((BaseProductWidgetFragment) widget).Collapse();
-            }
-        }
-    }
-
-    public void UpdateExpandCollapseAll() {
-        if (productWidgetFragments != null) {
-            for (Fragment widget : productWidgetFragments) {
-                if (widget instanceof BaseProductWidgetFragment)
-                    ((BaseProductWidgetFragment) widget).UpdateCollapsingIconAndView();
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.yuxifu.everneeds.ui.custom_views;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,7 +15,11 @@ public class Divider {
 
     public static View getFullSpanDivider(Context context, int heightDimenResId, int colorResId) {
         View divider = new View(context);
-        divider.setBackgroundResource(colorResId);
+        TypedValue outValue = new TypedValue();
+        if (context.getTheme().resolveAttribute(android.R.attr.listDivider,
+                outValue, true)) {
+            divider.setBackgroundResource(outValue.resourceId);
+        }
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 (int) context.getResources().getDimension(heightDimenResId));
         divider.setLayoutParams(layoutParams);

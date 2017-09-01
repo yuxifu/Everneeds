@@ -29,6 +29,7 @@ import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
 import com.yuxifu.everneeds.ui.categories.more.MoreNavigationFragment;
 import com.yuxifu.everneeds.ui.categories.plan.PlanNavigationFragment;
 import com.yuxifu.everneeds.ui.products.calendar.CalendarWidgetFragment;
+import com.yuxifu.everneeds.ui.products.todolist.TodoWidgetFragment;
 import com.yuxifu.everneeds.util.ResourceHelper;
 
 /**
@@ -36,6 +37,7 @@ import com.yuxifu.everneeds.util.ResourceHelper;
  */
 public class MainActivity extends AppCompatActivity implements
         CalendarWidgetFragment.OnFragmentInteractionListener,
+        TodoWidgetFragment.OnFragmentInteractionListener,
         PlaceholderItemFragment.OnListFragmentInteractionListener,
         PlanNavigationFragment.OnFragmentInteractionListener,
         MoreNavigationFragment.OnFragmentInteractionListener {
@@ -95,10 +97,9 @@ public class MainActivity extends AppCompatActivity implements
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) {
+                if (position == 0 || position == navTabs().length - 1) {
                     toolbar.setTitle(R.string.app_name);
-                }
-                else {   //display app name at the "home" page
+                } else {   //display app name at the "home" page
                     toolbar.setTitle(navTabs()[position]);
                 }
             }
