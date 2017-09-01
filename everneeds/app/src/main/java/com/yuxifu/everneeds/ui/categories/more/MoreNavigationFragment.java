@@ -187,7 +187,7 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         }
     }
 
-    private void setNightMode(){
+    private void setNightMode() {
         int currentModeIndex = 0;
         switch (AppCompatDelegate.getDefaultNightMode()) {
             case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
@@ -210,12 +210,26 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
                 .itemsCallbackSingleChoice(
                         currentModeIndex,
                         (dialog, view, which, text) -> {
-                            getMainActivity().showToast(which + ": " + text);
+                            int nightMode = 0;
+                            switch (which) {
+                                case 0:
+                                    nightMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
+                                    break;
+                                case 1:
+                                    nightMode = AppCompatDelegate.MODE_NIGHT_AUTO;
+                                    break;
+                                case 2:
+                                    nightMode = AppCompatDelegate.MODE_NIGHT_NO;
+                                    break;
+                                case 3:
+                                    nightMode = AppCompatDelegate.MODE_NIGHT_YES;
+                                    break;
+                            }
+                            getMainActivity().setNightMode(nightMode);
                             return true; // allow selection
                         })
                 .positiveText(R.string.dialog_select)
                 .show();
-
     }
 
 
