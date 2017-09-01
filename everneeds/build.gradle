@@ -48,6 +48,7 @@ ext {
     glideVersion = '3.7.0'
     circleimageviewVersion = '2.0.0'
     sectionedRecyclerviewVersion = '0.5.0'
+    materialDialogsVersion = '0.9.4.7'
 }
 
 /*

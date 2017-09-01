@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.yuxifu.everneeds.R;
@@ -253,6 +254,16 @@ public class MainActivity extends AppCompatActivity implements
 
     public void showSnackbarShortNotImplementedIdMessage(int id) {
         showSnackbarShortMessage("Not implemented: " + ResourceHelper.idToName(this, id));
+    }
+
+    private Toast toast;
+    public void showToast(String message) {
+        if (toast != null) {
+            toast.cancel();
+            toast = null;
+        }
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     //

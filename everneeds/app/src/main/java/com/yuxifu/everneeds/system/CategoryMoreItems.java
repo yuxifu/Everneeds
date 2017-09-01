@@ -27,10 +27,16 @@ public class CategoryMoreItems {
                 null, false, null);
         items.add(favorites);
 
+        //night mode
+        CategoryMoreItem nightMode = new CategoryMoreItem(R.id.list_item_night_mode,
+                R.string.night_mode_list_item_title, R.drawable.icons8_moon_stars_100,
+                null, true, null);
+        items.add(nightMode);
+
         //settings
         CategoryMoreItem settings = new CategoryMoreItem(R.id.list_item_settings,
                 R.string.settings_list_item_title, R.drawable.icons8_settings_96,
-                null, true, null);
+                null, false, null);
         items.add(settings);
 
         //add more

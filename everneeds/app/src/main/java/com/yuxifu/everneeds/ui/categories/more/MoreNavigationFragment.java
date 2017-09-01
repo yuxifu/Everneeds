@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,11 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.system.CategoryMoreItem;
 import com.yuxifu.everneeds.system.CategoryMoreItems;
+import com.yuxifu.everneeds.ui.categories.base.NavigationFragment;
 import com.yuxifu.everneeds.ui.custom_views.ColorOptionsView;
 import com.yuxifu.everneeds.ui.custom_views.Divider;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView;
@@ -27,7 +30,7 @@ import com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView;
  * Use the {@link MoreNavigationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MoreNavigationFragment extends Fragment implements View.OnClickListener {
+public class MoreNavigationFragment extends NavigationFragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -80,7 +83,7 @@ public class MoreNavigationFragment extends Fragment implements View.OnClickList
         LinearLayout linearLayout = view.findViewById(R.id.item_container);
 
         //insert a divider at the top
-        linearLayout.addView(Divider.getFullSpanDividerThick(getContext()),0);
+        linearLayout.addView(Divider.getFullSpanDividerThick(getContext()), 0);
 
         //top view
         ColorOptionsView cov = view.findViewById(R.id.color_option);
@@ -92,13 +95,13 @@ public class MoreNavigationFragment extends Fragment implements View.OnClickList
             if (item.isNewSection()) {   //wide divider
                 linearLayout.addView(Divider.getFullSpanDividerThick(getContext()));
             } else { //thin divider
-                linearLayout.addView(Divider.getFullSpanDividerThin(getContext()));
+                linearLayout.addView(Divider.getDividerThin(getContext(), 64));
             }
 
             //item
             ImageTitleImageListItemView itemView = new ImageTitleImageListItemView(linearLayout.getContext());
             LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
-                    (int)getContext().getResources().getDimension(R.dimen.image_title_image_list_item_height));
+                    (int) getContext().getResources().getDimension(R.dimen.image_title_image_list_item_height));
             itemView.setLayoutParams(layoutParams);
             itemView.setId(item.getViewId());
             itemView.setTitle(item.getTitleId());
@@ -166,15 +169,54 @@ public class MoreNavigationFragment extends Fragment implements View.OnClickList
     }
 
     public void onClick(View view) {
-        String text = "";
-        if (view.getId() == R.id.color_option) {
-            text = "Color Option";
+        int viewId = view.getId();
+        switch (viewId) {
+            case R.id.list_item_night_mode:
+                setNightMode();
+                break;
+            case R.id.color_option:
+                Toast.makeText(getActivity(), "Color Option", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                CategoryMoreItem item = CategoryMoreItems.getById(view.getId());
+                if (item != null) {
+                    String text = getContext().getResources().getString(item.getTitleId());
+                    Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
-        ;
-        CategoryMoreItem item = CategoryMoreItems.getById(view.getId());
-        if (item != null) {
-            text = getContext().getResources().getString(item.getTitleId());
-        }
-        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
     }
+
+    private void setNightMode(){
+        int currentModeIndex = 0;
+        switch (AppCompatDelegate.getDefaultNightMode()) {
+            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
+                currentModeIndex = 0;
+                break;
+            case AppCompatDelegate.MODE_NIGHT_AUTO:
+                currentModeIndex = 1;
+                break;
+            case AppCompatDelegate.MODE_NIGHT_NO:
+                currentModeIndex = 2;
+                break;
+            case AppCompatDelegate.MODE_NIGHT_YES:
+                currentModeIndex = 3;
+                break;
+        }
+
+        new MaterialDialog.Builder(getMainActivity())
+                .title(R.string.night_mode_dialog_title)
+                .items(R.array.night_mode)
+                .itemsCallbackSingleChoice(
+                        currentModeIndex,
+                        (dialog, view, which, text) -> {
+                            getMainActivity().showToast(which + ": " + text);
+                            return true; // allow selection
+                        })
+                .positiveText(R.string.dialog_select)
+                .show();
+
+    }
+
+
 }

@@ -4,6 +4,11 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.yuxifu.everneeds"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -71,6 +76,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     implementation "de.hdodenhof:circleimageview:$rootProject.circleimageviewVersion"
     implementation "com.afollestad:sectioned-recyclerview:$rootProject.sectionedRecyclerviewVersion"
+    implementation "com.afollestad.material-dialogs:core:$rootProject.materialDialogsVersion"
 
     // App's dependencies, including test
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"

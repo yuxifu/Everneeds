@@ -142,8 +142,21 @@
     <string name="text_view_text">Text</string>
 
     <!-- More page titles -->
+    <string name="night_mode_list_item_title">Night Mode</string>
     <string name="settings_list_item_title">Settings</string>
     <string name="statistics_list_item_title">Statistics</string>
     <string name="favorites_list_item_title">Favorites</string>
+
+    <!-- night mode -->
+    <string name="night_mode_dialog_title">Night Mode</string>
+    <string-array name="night_mode">
+        <item>Follow System</item>
+        <item>Automatic</item>
+        <item>Day (always)</item>
+        <item>Night (always)</item>
+    </string-array>
+
+    <!-- dialog text -->
+    <string name="dialog_select">Select</string>
 
 </resources>

@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class ProductNavigationFragment extends Fragment  {
+public abstract class ProductNavigationFragment extends NavigationFragment  {
 
     NestedScrollView mNestedScrollView;
     LinearLayout mLinearLayout;

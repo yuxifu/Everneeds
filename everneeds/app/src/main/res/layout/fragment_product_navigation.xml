@@ -9,8 +9,13 @@
     <LinearLayout
         android:id="@+id/main_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/product_card_margin_vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/product_container_margin_top"
+        android:layout_marginBottom="@dimen/product_container_margin_bottom"
+        android:paddingLeft="@dimen/product_container_padding_horizontal"
+        android:paddingRight="@dimen/product_container_padding_horizontal"
+        android:paddingTop="@dimen/product_container_padding_vertical"
+        android:paddingBottom="@dimen/product_container_padding_vertical"
         android:orientation="vertical" />
 
 </android.support.v4.widget.NestedScrollView>
