@@ -149,6 +149,10 @@
 
     <!-- night mode -->
     <string name="night_mode_dialog_title">Night Mode</string>
+    <string name="night_mode_follow_system_title">Follow System</string>
+    <string name="night_mode_auto_title">Automatic</string>
+    <string name="night_mode_day_title">Day (always)</string>
+    <string name="night_mode_night_title">Night (always)</string>
     <string-array name="night_mode">
         <item>Follow System</item>
         <item>Automatic</item>

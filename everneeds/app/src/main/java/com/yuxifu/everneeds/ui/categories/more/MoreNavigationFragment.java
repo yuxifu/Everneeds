@@ -36,6 +36,8 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    LinearLayout linearLayout;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -80,7 +82,7 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         View view = inflater.inflate(R.layout.fragment_more_navigation, container, false);
 
         //get container layout
-        LinearLayout linearLayout = view.findViewById(R.id.item_container);
+        linearLayout = view.findViewById(R.id.item_container);
 
         //insert a divider at the top
         linearLayout.addView(Divider.getFullSpanDividerThick(getContext()), 0);
@@ -121,6 +123,9 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
             //
             linearLayout.addView(itemView);
         }
+
+        //
+        updateNightModeItemTitle();
 
         //add a divider at the bottom
         linearLayout.addView(Divider.getFullSpanDividerThick(getContext()));
@@ -187,7 +192,7 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         }
     }
 
-    private void setNightMode() {
+    private int getCurrentNightModeIndex() {
         int currentModeIndex = 0;
         switch (AppCompatDelegate.getDefaultNightMode()) {
             case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
@@ -203,7 +208,35 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
                 currentModeIndex = 3;
                 break;
         }
+        return currentModeIndex;
+    }
 
+    private int getCurrentNightModeTitleResId() {
+        switch (AppCompatDelegate.getDefaultNightMode()) {
+            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
+                return R.string.night_mode_follow_system_title;
+            case AppCompatDelegate.MODE_NIGHT_AUTO:
+                return R.string.night_mode_auto_title;
+            case AppCompatDelegate.MODE_NIGHT_NO:
+                return R.string.night_mode_day_title;
+            case AppCompatDelegate.MODE_NIGHT_YES:
+                return R.string.night_mode_night_title;
+        }
+        return R.string.night_mode_auto_title;
+    }
+
+    private void updateNightModeItemTitle() {
+        int titleResId = getCurrentNightModeTitleResId();
+        CharSequence title = getMainActivity().getResources().getString(R.string.night_mode_dialog_title) + ": "
+                + getMainActivity().getResources().getString(titleResId);
+        ImageTitleImageListItemView itemView = linearLayout.findViewById(R.id.list_item_night_mode);
+        if(itemView!=null) {
+            itemView.setTitle(title);
+        }
+    }
+
+    private void setNightMode() {
+        int currentModeIndex = getCurrentNightModeIndex();
         new MaterialDialog.Builder(getMainActivity())
                 .title(R.string.night_mode_dialog_title)
                 .items(R.array.night_mode)
@@ -226,6 +259,7 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
                                     break;
                             }
                             getMainActivity().setNightMode(nightMode);
+                            updateNightModeItemTitle();
                             return true; // allow selection
                         })
                 .positiveText(R.string.dialog_select)
