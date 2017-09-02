@@ -69,10 +69,13 @@
     <color name="icon_disabled">#FF999999</color>
 
     <!-- product widget -->
-    <color name="product_widget_header_background">#33000000</color>
+    <color name="product_widget_header_background">#30000000</color>
     <color name="product_widget_background">#33000000</color>
 
     <!-- More page divider color -->
-    <color name="list_divider_default_color_light_grey">#10000000</color>
+    <color name="list_divider_default_color_light_grey">#30000000</color>
+
+    <!-- darker panel background -->
+    <color name="card_view_container_background_grey">#07000000</color>
 
 </resources>

@@ -4,6 +4,7 @@
     android:id="@+id/top_nested_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/card_view_container_background_grey"
     tools:context="com.yuxifu.everneeds.ui.categories.base.ProductNavigationFragment">
 
     <LinearLayout

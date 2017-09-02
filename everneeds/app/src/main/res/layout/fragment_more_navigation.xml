@@ -3,27 +3,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/card_view_container_background_grey"
     tools:context="com.yuxifu.everneeds.ui.categories.more.MoreNavigationFragment">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/product_container_padding_vertical"
+        android:paddingTop="@dimen/product_container_padding_vertical">
 
-        <!--  a divider will be inserted here programmatically  -->
-
-        <com.yuxifu.everneeds.ui.custom_views.ColorOptionsView
-            android:id="@+id/color_option"
+        <!--  section 1 -->
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/listPreferredItemHeight"
-            android:background="?android:selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            custom:titleText="Background color"
-            custom:valueColor="@color/colorRed" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/product_card_margin_bottom"
+            android:layout_marginTop="@dimen/product_card_margin_top">
 
-        <!--  dividers and more items will be appended here programmatically  -->
+            <com.yuxifu.everneeds.ui.custom_views.ColorOptionsView
+                android:id="@+id/color_option"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                custom:titleText="Background color"
+                custom:valueColor="@color/colorRed" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/product_card_margin_bottom"
+            android:layout_marginTop="@dimen/product_card_margin_top">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_title_image_list_item_height"
+                    android:background="?android:selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    custom:firstImageSrc="@drawable/icons8_statistics_96"
+                    custom:titleText="@string/statistics_list_item_title" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="64dp"
+                    android:layout_marginStart="64dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/list_divider_default_thickness_thin"
+                        android:background="@color/list_divider_default_color_light_grey" />
+
+                </LinearLayout>
+
+                <com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_title_image_list_item_height"
+                    android:background="?android:selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    custom:firstImageSrc="@drawable/icons8_favorites_80"
+                    custom:titleText="@string/favorites_list_item_title" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!--  section 3 -->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/product_card_margin_bottom"
+            android:layout_marginTop="@dimen/product_card_margin_top">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_title_image_list_item_height"
+                    android:background="?android:selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    custom:firstImageSrc="@drawable/icons8_moon_stars_100"
+                    custom:titleText="@string/night_mode_list_item_title" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="64dp"
+                    android:layout_marginStart="64dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/list_divider_default_thickness_thin"
+                        android:background="@color/list_divider_default_color_light_grey" />
+
+                </LinearLayout>
+
+                <com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_title_image_list_item_height"
+                    android:background="?android:selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    custom:firstImageSrc="@drawable/icons8_settings_96"
+                    custom:titleText="@string/settings_list_item_title" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
 
     </LinearLayout>
 

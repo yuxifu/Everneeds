@@ -81,6 +81,7 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_more_navigation, container, false);
 
+        /*
         //get container layout
         linearLayout = view.findViewById(R.id.item_container);
 
@@ -129,6 +130,7 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
 
         //add a divider at the bottom
         linearLayout.addView(Divider.getFullSpanDividerThick(getContext()));
+        */
 
         //
         return view;

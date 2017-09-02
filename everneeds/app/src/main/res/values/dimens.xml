@@ -52,7 +52,7 @@
 
     <!-- default_list_divider -->
     <dimen name="list_divider_default_thickness_thick">12dp</dimen>
-    <dimen name="list_divider_default_thickness_thin">1dp</dimen>
+    <dimen name="list_divider_default_thickness_thin">0.75dp</dimen>
 
     <!-- ImageTitleImageListItemView -->
     <dimen name="image_title_image_list_item_height">40dp</dimen>
