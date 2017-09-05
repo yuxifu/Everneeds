@@ -5,13 +5,20 @@
     <declare-styleable name="ColorOptionsView">
         <attr name="titleText" localization="suggested" />
         <attr name="valueColor" format="color" />
+        <attr name="firstImageSrc" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="ImageTitleImageListItemView">
         <attr name="titleText" localization="suggested" />
-        <attr name="firstImageSrc" format="reference" />
+        <attr name="firstImageSrc" />
         <attr name="secondImageSrc" format="reference" />
         <attr name="secondImageOn" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ImageTitleSwitchListItemView">
+        <attr name="titleText" localization="suggested" />
+        <attr name="firstImageSrc" />
+        <attr name="switchOn" format="boolean" />
     </declare-styleable>
 
 </resources>

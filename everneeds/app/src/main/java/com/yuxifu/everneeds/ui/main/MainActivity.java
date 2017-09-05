@@ -177,16 +177,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        switch (AppCompatDelegate.getDefaultNightMode()) {
-            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
-            case AppCompatDelegate.MODE_NIGHT_AUTO:
-            case AppCompatDelegate.MODE_NIGHT_NO:
-                menu.findItem(R.id.nav_actionbar_options_night_mode).setChecked(false);
-                break;
-            case AppCompatDelegate.MODE_NIGHT_YES:
-                menu.findItem(R.id.nav_actionbar_options_night_mode).setChecked(true);
-                break;
-        }
+        //menu.findItem(R.id.nav_actionbar_options_night_mode).setChecked(isNightModeOn());
 
         //
         return true;
@@ -196,12 +187,12 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.nav_actionbar_options_night_mode:
+            /*case R.id.nav_actionbar_options_night_mode:
                 boolean newNightMode = !item.isChecked();
-                setNightMode(newNightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+                enableNightMode(newNightMode);
                 item.setChecked(newNightMode);
                 break;
-            case R.id.nav_actionbar_options_about:
+            case R.id.nav_actionbar_options_about:*/
             case R.id.nav_actionbar_options_search:
                 showSnackbarShortNotImplementedIdMessage(id);
                 break;
@@ -210,9 +201,23 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     //
-    public void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
+    public void setNightMode(@AppCompatDelegate.NightMode int nightMode, boolean recreateActivity) {
         AppCompatDelegate.setDefaultNightMode(nightMode);
-        recreate();
+        if (recreateActivity) {
+            recreate();
+        }
+    }
+
+    public void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
+        setNightMode(nightMode, true);
+    }
+
+    public void enableNightMode(Boolean nightModeOn){
+        setNightMode(nightModeOn ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+    }
+
+    public boolean isNightModeOn() {
+        return AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
     }
 
     @Override
@@ -257,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private Toast toast;
+
     public void showToast(String message) {
         if (toast != null) {
             toast.cancel();

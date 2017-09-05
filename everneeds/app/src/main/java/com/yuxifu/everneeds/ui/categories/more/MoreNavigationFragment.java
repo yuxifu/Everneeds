@@ -4,23 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatDelegate;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.system.CategoryMoreItem;
-import com.yuxifu.everneeds.system.CategoryMoreItems;
 import com.yuxifu.everneeds.ui.categories.base.NavigationFragment;
-import com.yuxifu.everneeds.ui.custom_views.ColorOptionsView;
-import com.yuxifu.everneeds.ui.custom_views.Divider;
-import com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView;
+import com.yuxifu.everneeds.ui.custom_views.ImageTitleSwitchListItemView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +37,9 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private ImageTitleSwitchListItemView nightModeItem;
+    private Switch nightModeSwitch;
 
     public MoreNavigationFragment() {
         // Required empty public constructor
@@ -81,56 +78,16 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_more_navigation, container, false);
 
-        /*
-        //get container layout
-        linearLayout = view.findViewById(R.id.item_container);
-
-        //insert a divider at the top
-        linearLayout.addView(Divider.getFullSpanDividerThick(getContext()), 0);
-
-        //top view
-        ColorOptionsView cov = view.findViewById(R.id.color_option);
-        cov.setOnClickListener(this);
-
-        //add more items
-        for (CategoryMoreItem item : CategoryMoreItems.getCategoryMoreItems()) {
-            //divider
-            if (item.isNewSection()) {   //wide divider
-                linearLayout.addView(Divider.getFullSpanDividerThick(getContext()));
-            } else { //thin divider
-                linearLayout.addView(Divider.getDividerThin(getContext(), 64));
-            }
-
-            //item
-            ImageTitleImageListItemView itemView = new ImageTitleImageListItemView(linearLayout.getContext());
-            LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
-                    (int) getContext().getResources().getDimension(R.dimen.image_title_image_list_item_height));
-            itemView.setLayoutParams(layoutParams);
-            itemView.setId(item.getViewId());
-            itemView.setTitle(item.getTitleId());
-            itemView.setFirstImageId(item.getFirstImageId());
-            if (item.getSecondImageId() != null) {
-                itemView.setSecondImage(true, item.getSecondImageId());
-            }
-            itemView.setClickable(true);
-            itemView.setFocusable(true);
-            TypedValue outValue = new TypedValue();
-            if (getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
-                    outValue, true)) {
-                itemView.setBackgroundResource(outValue.resourceId);
-            }
-            itemView.setOnClickListener(this);
-
-            //
-            linearLayout.addView(itemView);
-        }
-
         //
-        updateNightModeItemTitle();
-
-        //add a divider at the bottom
-        linearLayout.addView(Divider.getFullSpanDividerThick(getContext()));
-        */
+        ImageTitleSwitchListItemView nightModeItem = view.findViewById(R.id.night_mode_item);
+        Switch nightModeSwitch = nightModeItem.findViewById(R.id.on_off);
+        nightModeSwitch.setChecked(getMainActivity().isNightModeOn());
+        nightModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getMainActivity().enableNightMode(isChecked);
+            }
+        });
 
         //
         return view;
@@ -178,95 +135,12 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
-            case R.id.list_item_night_mode:
-                setNightMode();
-                break;
             case R.id.color_option:
                 Toast.makeText(getActivity(), "Color Option", Toast.LENGTH_SHORT).show();
                 break;
             default:
-                CategoryMoreItem item = CategoryMoreItems.getById(view.getId());
-                if (item != null) {
-                    String text = getContext().getResources().getString(item.getTitleId());
-                    Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
-                }
                 break;
         }
     }
-
-    private int getCurrentNightModeIndex() {
-        int currentModeIndex = 0;
-        switch (AppCompatDelegate.getDefaultNightMode()) {
-            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
-                currentModeIndex = 0;
-                break;
-            case AppCompatDelegate.MODE_NIGHT_AUTO:
-                currentModeIndex = 1;
-                break;
-            case AppCompatDelegate.MODE_NIGHT_NO:
-                currentModeIndex = 2;
-                break;
-            case AppCompatDelegate.MODE_NIGHT_YES:
-                currentModeIndex = 3;
-                break;
-        }
-        return currentModeIndex;
-    }
-
-    private int getCurrentNightModeTitleResId() {
-        switch (AppCompatDelegate.getDefaultNightMode()) {
-            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
-                return R.string.night_mode_follow_system_title;
-            case AppCompatDelegate.MODE_NIGHT_AUTO:
-                return R.string.night_mode_auto_title;
-            case AppCompatDelegate.MODE_NIGHT_NO:
-                return R.string.night_mode_day_title;
-            case AppCompatDelegate.MODE_NIGHT_YES:
-                return R.string.night_mode_night_title;
-        }
-        return R.string.night_mode_auto_title;
-    }
-
-    private void updateNightModeItemTitle() {
-        int titleResId = getCurrentNightModeTitleResId();
-        CharSequence title = getMainActivity().getResources().getString(R.string.night_mode_dialog_title) + ": "
-                + getMainActivity().getResources().getString(titleResId);
-        ImageTitleImageListItemView itemView = linearLayout.findViewById(R.id.list_item_night_mode);
-        if(itemView!=null) {
-            itemView.setTitle(title);
-        }
-    }
-
-    private void setNightMode() {
-        int currentModeIndex = getCurrentNightModeIndex();
-        new MaterialDialog.Builder(getMainActivity())
-                .title(R.string.night_mode_dialog_title)
-                .items(R.array.night_mode)
-                .itemsCallbackSingleChoice(
-                        currentModeIndex,
-                        (dialog, view, which, text) -> {
-                            int nightMode = 0;
-                            switch (which) {
-                                case 0:
-                                    nightMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
-                                    break;
-                                case 1:
-                                    nightMode = AppCompatDelegate.MODE_NIGHT_AUTO;
-                                    break;
-                                case 2:
-                                    nightMode = AppCompatDelegate.MODE_NIGHT_NO;
-                                    break;
-                                case 3:
-                                    nightMode = AppCompatDelegate.MODE_NIGHT_YES;
-                                    break;
-                            }
-                            getMainActivity().setNightMode(nightMode);
-                            updateNightModeItemTitle();
-                            return true; // allow selection
-                        })
-                .positiveText(R.string.dialog_select)
-                .show();
-    }
-
 
 }

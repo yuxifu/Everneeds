@@ -10,6 +10,7 @@
         android:title="@string/nav_actionbar_options_search"
         app:showAsAction="always" />
 
+    <!--
     <item
         android:id="@+id/nav_actionbar_options_night_mode"
         android:orderInCategory="101"
@@ -22,6 +23,6 @@
         android:id="@+id/nav_actionbar_options_about"
         android:orderInCategory="102"
         android:title="@string/nav_actionbar_options_about"
-        app:showAsAction="never" />
+        app:showAsAction="never" />  -->
 
 </menu>

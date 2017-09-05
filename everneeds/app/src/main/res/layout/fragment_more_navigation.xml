@@ -91,12 +91,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView
+                <com.yuxifu.everneeds.ui.custom_views.ImageTitleSwitchListItemView
+                    android:id="@+id/night_mode_item"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/image_title_image_list_item_height"
                     android:background="?android:selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
+                    custom:switchOn="true"
                     custom:firstImageSrc="@drawable/icons8_moon_stars_100"
                     custom:titleText="@string/night_mode_list_item_title" />
 
