@@ -3,7 +3,6 @@ package com.yuxifu.everneeds.ui.products.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
-import com.yuxifu.everneeds.ui.main.MainActivity;
+import com.yuxifu.everneeds.ui.base.ContextFragment;
 
-public abstract class BaseProductWidgetFragment extends Fragment implements View.OnClickListener {
+public abstract class BaseProductWidgetFragment extends ContextFragment implements View.OnClickListener {
 
     private static final String INSTANCE_STATE_COLLAPSED = "collapsed";
 
@@ -50,6 +49,7 @@ public abstract class BaseProductWidgetFragment extends Fragment implements View
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LoadSharedPreferences();
     }
 
     @Override
@@ -80,9 +80,6 @@ public abstract class BaseProductWidgetFragment extends Fragment implements View
         caretImageView.setClickable(true);
         caretImageView.setOnClickListener(this);*/
 
-        //
-        UpdateCollapsingIconAndView();
-
         return topView;
     }
 
@@ -97,7 +94,6 @@ public abstract class BaseProductWidgetFragment extends Fragment implements View
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             collapsed = savedInstanceState.getBoolean(INSTANCE_STATE_COLLAPSED);
-            UpdateCollapsingIconAndView();
         }
     }
 
@@ -109,10 +105,12 @@ public abstract class BaseProductWidgetFragment extends Fragment implements View
     @Override
     public void onResume() {
         super.onResume();
+        UpdateCollapsingIconAndView();
     }
 
     @Override
     public void onPause() {
+        SaveSharedPreferences();
         super.onPause();
     }
 
@@ -143,9 +141,11 @@ public abstract class BaseProductWidgetFragment extends Fragment implements View
 
     protected abstract int getTitleResId();
 
-    // Get parent activity
-    public MainActivity getMainActivity() {
-        return (MainActivity) getActivity();
+    // shared preferences
+    protected void LoadSharedPreferences() {
+    }
+
+    protected void SaveSharedPreferences() {
     }
 
     public void UpdateCollapsingIconAndView() {

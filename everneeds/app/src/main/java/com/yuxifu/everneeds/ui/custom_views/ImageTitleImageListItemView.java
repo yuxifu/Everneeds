@@ -68,15 +68,6 @@ public class ImageTitleImageListItemView extends LinearLayout {
             setFirstImageId(firstImageResId);
             setSecondImage(secondImageOn, secondImageResId);
         }
-
-        //other attrs: set in the container
-        /*setClickable(true);
-        setFocusable(true);
-        TypedValue outValue = new TypedValue();
-        if (getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
-                outValue, true)) {
-            setBackgroundResource(outValue.resourceId);
-        }*/
     }
 
     public ImageTitleImageListItemView(Context context) {

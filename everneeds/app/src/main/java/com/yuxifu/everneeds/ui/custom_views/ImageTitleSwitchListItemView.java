@@ -67,15 +67,6 @@ public class ImageTitleSwitchListItemView extends LinearLayout {
             setFirstImageId(firstImageResId);
             setSwitchOn(switchOn);
         }
-
-        //other attrs: set in the container
-        /*setClickable(true);
-        setFocusable(true);
-        TypedValue outValue = new TypedValue();
-        if (getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
-                outValue, true)) {
-            setBackgroundResource(outValue.resourceId);
-        }*/
     }
 
     public ImageTitleSwitchListItemView(Context context) {

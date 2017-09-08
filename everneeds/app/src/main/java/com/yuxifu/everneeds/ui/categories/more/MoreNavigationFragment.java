@@ -80,11 +80,11 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         //night mode controls
         ImageTitleSwitchListItemView nightModeItem = view.findViewById(R.id.night_mode_item);
         nightModeSwitch = nightModeItem.findViewById(R.id.on_off);
-        nightModeSwitch.setChecked(getMainActivity().isNightModeOn());
+        nightModeSwitch.setChecked(mainActivity.isNightModeOn());
         nightModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getMainActivity().ResetNightModeOn(isChecked);
+                mainActivity.ResetNightModeOn(isChecked);
             }
         });
         nightModeItem.setOnClickListener(this);
@@ -166,15 +166,15 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     }
 
     private void doColorOptions() {
-        getMainActivity().showSnackbarShortNotImplementedIdMessage("Color option");
+        mainActivity.showSnackbarShortNotImplementedIdMessage("Color option");
     }
 
     private void doStatistics() {
-        getMainActivity().showSnackbarShortNotImplementedIdMessage("Statistics");
+        mainActivity.showSnackbarShortNotImplementedIdMessage("Statistics");
     }
 
     private void doFavorites() {
-        getMainActivity().showSnackbarShortNotImplementedIdMessage("My Favorites");
+        mainActivity.showSnackbarShortNotImplementedIdMessage("My Favorites");
     }
 
     private void doNightMode() {
@@ -182,7 +182,7 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     }
 
     private void doSettings() {
-        getMainActivity().showSnackbarShortNotImplementedIdMessage("Settings");
+        mainActivity.showSnackbarShortNotImplementedIdMessage("Settings");
     }
 
 }

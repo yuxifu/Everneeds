@@ -14,6 +14,8 @@ public class AppPreferences {
     //region SharedPreference keys
     private static final String PREFS_NIGHT_MODE_ON = "PREFS_NIGHT_MODE_ON";
     private static final String PREFS_CURRENT_MAIN_NAV_INDEX = "PREFS_CURRENT_MAIN_NAV_INDEX";
+    private static final String PREFS_WIDGET_CALENDAR_COLLAPSED = "PREFS_WIDGET_CALENDAR_COLLAPSED";
+    private static final String PREFS_WIDGET_TODO_COLLAPSED = "PREFS_WIDGET_TODO_COLLAPSED";
     //endregion
 
     //region Night Mode On
@@ -39,6 +41,28 @@ public class AppPreferences {
     public static void putCurrentMainNavigationIndex(@NonNull Context context, int currentTab) {
         SharedPreferencesHelper sph = new SharedPreferencesHelper(context);
         sph.putInt(AppPreferences.PREFS_CURRENT_MAIN_NAV_INDEX, currentTab);
+    }
+    //endregion
+
+    //region Widget Calendar Collapsed
+    public static Boolean getWidgetCalendarCollapsed(@NonNull Context context) {
+        SharedPreferencesHelper sph = new SharedPreferencesHelper(context);
+        return sph.getBoolean(AppPreferences.PREFS_WIDGET_CALENDAR_COLLAPSED, false);
+    }
+    public static void putWidgetCalendarCollapsed(@NonNull Context context, Boolean collapsed) {
+        SharedPreferencesHelper sph = new SharedPreferencesHelper(context);
+        sph.putBoolean(PREFS_WIDGET_CALENDAR_COLLAPSED, collapsed);
+    }
+    //endregion
+
+    //region Widget To-Do Collapsed
+    public static Boolean getWidgetTodoCollapsed(@NonNull Context context) {
+        SharedPreferencesHelper sph = new SharedPreferencesHelper(context);
+        return sph.getBoolean(AppPreferences.PREFS_WIDGET_TODO_COLLAPSED, false);
+    }
+    public static void putWidgetTodoCollapsed(@NonNull Context context, Boolean collapsed) {
+        SharedPreferencesHelper sph = new SharedPreferencesHelper(context);
+        sph.putBoolean(PREFS_WIDGET_TODO_COLLAPSED, collapsed);
     }
     //endregion
 

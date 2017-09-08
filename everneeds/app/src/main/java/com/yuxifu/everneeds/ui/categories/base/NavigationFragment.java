@@ -1,23 +1,16 @@
 package com.yuxifu.everneeds.ui.categories.base;
 
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 
-import com.yuxifu.everneeds.ui.main.MainActivity;
+import com.yuxifu.everneeds.ui.base.ContextFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NavigationFragment extends Fragment {
+public abstract class NavigationFragment extends ContextFragment {
 
     public NavigationFragment() {
         // Required empty public constructor
     }
-
-    public MainActivity getMainActivity() {
-        Activity activity = getActivity();
-        return (activity instanceof MainActivity) ? (MainActivity) activity : null;
-    }
-
 }

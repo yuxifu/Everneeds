@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.system.AppPreferences;
 import com.yuxifu.everneeds.ui.products.base.BaseProductWidgetFragment;
 
 public class TodoWidgetFragment extends BaseProductWidgetFragment {
@@ -106,5 +107,16 @@ public class TodoWidgetFragment extends BaseProductWidgetFragment {
     @Override
     protected int getTitleResId() {
         return R.string.product_widget_title_todo;
+    }
+
+    // shared preferences
+    @Override
+    protected void LoadSharedPreferences() {
+        collapsed = AppPreferences.getWidgetTodoCollapsed(context);
+    }
+
+    @Override
+    protected void SaveSharedPreferences() {
+        AppPreferences.putWidgetTodoCollapsed(context, collapsed);
     }
 }

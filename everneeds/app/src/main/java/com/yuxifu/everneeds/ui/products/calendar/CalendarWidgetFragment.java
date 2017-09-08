@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.system.AppPreferences;
 import com.yuxifu.everneeds.ui.products.base.BaseProductWidgetFragment;
 
 public class CalendarWidgetFragment extends BaseProductWidgetFragment {
@@ -107,4 +108,16 @@ public class CalendarWidgetFragment extends BaseProductWidgetFragment {
     protected int getTitleResId() {
         return R.string.product_widget_title_calendar;
     }
+
+    // shared preferences
+    @Override
+    protected void LoadSharedPreferences() {
+        collapsed = AppPreferences.getWidgetCalendarCollapsed(context);
+    }
+
+    @Override
+    protected void SaveSharedPreferences() {
+        AppPreferences.putWidgetCalendarCollapsed(context, collapsed);
+    }
+
 }
