@@ -10,10 +10,11 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui.categories.base.NavigationFragment;
+import com.yuxifu.everneeds.ui.custom_views.ColorOptionsView;
+import com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleSwitchListItemView;
 
 /**
@@ -30,15 +31,13 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    LinearLayout linearLayout;
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    private ImageTitleSwitchListItemView nightModeItem;
+    LinearLayout linearLayout;
     private Switch nightModeSwitch;
 
     public MoreNavigationFragment() {
@@ -78,16 +77,27 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_more_navigation, container, false);
 
-        //
+        //night mode controls
         ImageTitleSwitchListItemView nightModeItem = view.findViewById(R.id.night_mode_item);
-        Switch nightModeSwitch = nightModeItem.findViewById(R.id.on_off);
+        nightModeSwitch = nightModeItem.findViewById(R.id.on_off);
         nightModeSwitch.setChecked(getMainActivity().isNightModeOn());
         nightModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getMainActivity().enableNightMode(isChecked);
+                getMainActivity().ResetNightModeOn(isChecked);
             }
         });
+        nightModeItem.setOnClickListener(this);
+
+        //other click handlers
+        ColorOptionsView colorOptions = view.findViewById(R.id.color_option);
+        ImageTitleImageListItemView statistics = view.findViewById(R.id.statistics_item);
+        ImageTitleImageListItemView favorites = view.findViewById(R.id.favorites_item);
+        ImageTitleImageListItemView settings = view.findViewById(R.id.settings_item);
+        colorOptions.setOnClickListener(this);
+        statistics.setOnClickListener(this);
+        favorites.setOnClickListener(this);
+        settings.setOnClickListener(this);
 
         //
         return view;
@@ -136,11 +146,43 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         int viewId = view.getId();
         switch (viewId) {
             case R.id.color_option:
-                Toast.makeText(getActivity(), "Color Option", Toast.LENGTH_SHORT).show();
+                doColorOptions();
+                break;
+            case R.id.statistics_item:
+                doStatistics();
+                break;
+            case R.id.favorites_item:
+                doFavorites();
+                break;
+            case R.id.night_mode_item:
+                doNightMode();
+                break;
+            case R.id.settings_item:
+                doSettings();
                 break;
             default:
                 break;
         }
+    }
+
+    private void doColorOptions() {
+        getMainActivity().showSnackbarShortNotImplementedIdMessage("Color option");
+    }
+
+    private void doStatistics() {
+        getMainActivity().showSnackbarShortNotImplementedIdMessage("Statistics");
+    }
+
+    private void doFavorites() {
+        getMainActivity().showSnackbarShortNotImplementedIdMessage("My Favorites");
+    }
+
+    private void doNightMode() {
+        nightModeSwitch.setChecked(!nightModeSwitch.isChecked());
+    }
+
+    private void doSettings() {
+        getMainActivity().showSnackbarShortNotImplementedIdMessage("Settings");
     }
 
 }

@@ -1,5 +1,6 @@
 package com.yuxifu.everneeds.ui.main;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.system.AppPreferences;
 import com.yuxifu.everneeds.ui._exp.PlaceholderItemFragment;
 import com.yuxifu.everneeds.ui._exp.dummy.DummyContent;
 import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements
         PlanNavigationFragment.OnFragmentInteractionListener,
         MoreNavigationFragment.OnFragmentInteractionListener {
 
+    //constants
     public static int[] navTabs() {
         return new int[]{
                 R.string.nav_home_title,
@@ -54,13 +57,21 @@ public class MainActivity extends AppCompatActivity implements
         };
     }
 
+    //
+    private MainActivity self;
     private CoordinatorLayout coordinatorLayout;
     private Toolbar toolbar;
+    private ViewPager viewPager;
 
     @Override
     @CallSuper
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //must be called before onCreate() to apply theme
+        enableNightMode(AppPreferences.getNightModeOn(this));
+
+        //super
         super.onCreate(savedInstanceState);
+        self = this;
         setContentView(R.layout.activity_main);
 
         //
@@ -70,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements
         toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
-        ViewPager viewPager = findViewById(R.id.main_viewpager);
+        viewPager = findViewById(R.id.main_viewpager);
         setupViewPager(viewPager);
 
         SmartTabLayout smartLayout = findViewById(R.id.main_bottom_tab);
@@ -90,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements
         adapter.addFragment(new MoreNavigationFragment(), getResources().getString(navTabs()[5]));
         viewPager.setAdapter(adapter);
 
+        viewPager.setCurrentItem(AppPreferences.getCurrentMainNavigationIndex(this, navTabs().length - 1));
+
         final ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -103,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements
                 } else {   //display app name at the "home" page
                     toolbar.setTitle(navTabs()[position]);
                 }
+                AppPreferences.putCurrentMainNavigationIndex(self, position);
             }
 
             @Override
@@ -201,23 +215,28 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     //
-    public void setNightMode(@AppCompatDelegate.NightMode int nightMode, boolean recreateActivity) {
-        AppCompatDelegate.setDefaultNightMode(nightMode);
-        if (recreateActivity) {
-            recreate();
-        }
+    private void setNightMode(@AppCompatDelegate.NightMode int newNightMode) {
+        AppCompatDelegate.setDefaultNightMode(newNightMode);
     }
 
-    public void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
-        setNightMode(nightMode, true);
-    }
-
-    public void enableNightMode(Boolean nightModeOn){
-        setNightMode(nightModeOn ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+    public void enableNightMode(Boolean newNightModeOn) {
+        setNightMode(newNightModeOn ? AppCompatDelegate.MODE_NIGHT_YES
+                : AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public boolean isNightModeOn() {
         return AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
+    }
+
+    public void ResetNightModeOn(boolean nightModeOn) {
+        enableNightMode(nightModeOn);
+        AppPreferences.putNightModeOn(this, (nightModeOn));
+
+        //restart this activity
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(intent); // start same activity
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish(); // destroy older activity
     }
 
     @Override
@@ -232,13 +251,20 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onPause() {
+        //Save SharedPreference data here unless accomplished somewhere else in more frequent manner.
+        //AppPreferences.putNightModeOn(this, isNightModeOn());
+        //AppPreferences.putCurrentMainNavigationIndex(this, viewPager.getCurrentItem());
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public Toolbar getToolbar() {
         return toolbar;
     }
-
 
     public void showSnackbar(Snackbar snackbar) {
         CoordinatorLayout.LayoutParams params
@@ -259,6 +285,10 @@ public class MainActivity extends AppCompatActivity implements
 
     public void showSnackbarShortNotImplementedIdMessage(int id) {
         showSnackbarShortMessage("Not implemented: " + ResourceHelper.idToName(this, id));
+    }
+
+    public void showSnackbarShortNotImplementedIdMessage(CharSequence message) {
+        showSnackbarShortMessage("Not implemented: " + message);
     }
 
     private Toast toast;

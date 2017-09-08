@@ -44,6 +44,7 @@
                 android:orientation="vertical">
 
                 <com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView
+                    android:id="@+id/statistics_item"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/image_title_image_list_item_height"
                     android:background="?android:selectableItemBackground"
@@ -67,6 +68,7 @@
                 </LinearLayout>
 
                 <com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView
+                    android:id="@+id/favorites_item"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/image_title_image_list_item_height"
                     android:background="?android:selectableItemBackground"
@@ -96,6 +98,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/image_title_image_list_item_height"
                     android:background="?android:selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     custom:switchOn="true"
                     custom:firstImageSrc="@drawable/icons8_moon_stars_100"
                     custom:titleText="@string/night_mode_list_item_title" />
@@ -115,6 +119,7 @@
                 </LinearLayout>
 
                 <com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView
+                    android:id="@+id/settings_item"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/image_title_image_list_item_height"
                     android:background="?android:selectableItemBackground"

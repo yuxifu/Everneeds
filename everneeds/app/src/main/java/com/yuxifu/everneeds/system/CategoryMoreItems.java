@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by Yuxi on 8/31/17.
+ * 9/7: not used
  */
 
 public class CategoryMoreItems {
