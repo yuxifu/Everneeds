@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/more_user_profile_item_height"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/user_picture"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/more_user_profile_item_margin_left"
+        android:layout_marginStart="@dimen/more_user_profile_item_margin_left"
+        android:contentDescription="@string/image_view_content_description"
+        android:scaleType="fitCenter"
+        android:src="@drawable/quan_profile" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more_user_profile_user_name_title"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more_user_profile_user_id_title" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/user_qr_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/more_user_profile_item_margin_right"
+        android:layout_marginRight="@dimen/more_user_profile_item_margin_right"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/image_view_content_description"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icons8_qr_code_96" />
 
 </LinearLayout>

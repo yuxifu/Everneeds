@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui.categories.base.NavigationFragment;
-import com.yuxifu.everneeds.ui.custom_views.ColorOptionsView;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleSwitchListItemView;
 
@@ -90,11 +90,13 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         nightModeItem.setOnClickListener(this);
 
         //other click handlers
-        ColorOptionsView colorOptions = view.findViewById(R.id.color_option);
+        LinearLayout profile = view.findViewById(R.id.user_profile_item);
+        ImageView qr = profile.findViewById(R.id.user_qr_image);
         ImageTitleImageListItemView statistics = view.findViewById(R.id.statistics_item);
         ImageTitleImageListItemView favorites = view.findViewById(R.id.favorites_item);
         ImageTitleImageListItemView settings = view.findViewById(R.id.settings_item);
-        colorOptions.setOnClickListener(this);
+        profile.setOnClickListener(this);
+        qr.setOnClickListener(this);
         statistics.setOnClickListener(this);
         favorites.setOnClickListener(this);
         settings.setOnClickListener(this);
@@ -145,8 +147,11 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
-            case R.id.color_option:
-                doColorOptions();
+            case R.id.user_profile_item:
+                doUserProfile();
+                break;
+            case R.id.user_qr_image:
+                doQRCode();
                 break;
             case R.id.statistics_item:
                 doStatistics();
@@ -165,8 +170,12 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         }
     }
 
-    private void doColorOptions() {
-        mainActivity.showSnackbarShortNotImplementedIdMessage("Color option");
+    private void doUserProfile() {
+        mainActivity.showSnackbarShortNotImplementedIdMessage("User Profile");
+    }
+
+    private void doQRCode() {
+        mainActivity.showSnackbarShortNotImplementedIdMessage("QR Code");
     }
 
     private void doStatistics() {

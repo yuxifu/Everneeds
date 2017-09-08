@@ -142,10 +142,13 @@
     <string name="text_view_text">Text</string>
 
     <!-- More page titles -->
+    <string name="more_user_profile_user_name_title">User</string>
+    <string name="more_user_profile_user_id_title">user@example.com</string>
     <string name="night_mode_list_item_title">Night Mode</string>
     <string name="settings_list_item_title">Settings</string>
     <string name="statistics_list_item_title">Statistics</string>
     <string name="favorites_list_item_title">Favorites</string>
+
 
     <!-- night mode -->
     <string name="night_mode_dialog_title">Night Mode</string>

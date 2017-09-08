@@ -58,4 +58,9 @@
     <dimen name="image_title_image_list_item_height">40dp</dimen>
     <dimen name="image_title_image_list_item_horizontal_margin">20dp</dimen>
 
+    <!-- More - user profile -->
+    <dimen name="more_user_profile_item_height">60dp</dimen>
+    <dimen name="more_user_profile_item_margin_left">10dp</dimen>
+    <dimen name="more_user_profile_item_margin_right">20dp</dimen>
+
 </resources>
