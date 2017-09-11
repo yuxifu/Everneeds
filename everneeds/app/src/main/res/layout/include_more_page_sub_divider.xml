@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/more_sub_divider_margin_left"
+    android:layout_marginStart="@dimen/more_sub_divider_margin_left"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_more_navigation">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_divider_default_thickness_thin"
+        android:background="@color/list_divider_default_color_light_grey" />
+
+</LinearLayout>

@@ -23,28 +23,35 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".ui.main.SplashScreenActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.settings.SettingsOnePageActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.settings.SettingsMultiplePageActivity"
+            android:theme="@style/AppTheme.Wechat.DarkActionBar" />
 
         <!-- todo list activities: keep for testing code to run -->
         <activity android:name="._exp.todoapp.tasks.TasksActivity">
+
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,11 +72,12 @@
                 android:value="_exp.todoapp.tasks.TasksActivity" />
         </activity>
 
+        <activity android:name=".ui.settings.AboutActivity"
+            android:theme="@style/AppTheme" />
+
     </application>
 
-</manifest>
-
-    <!--
+</manifest><!--
           Yuxi Fu
 
         android:allowBackup: Whether to allow the application to participate in the backup and restore infrastructure.
@@ -87,4 +95,4 @@
 
         tools:ignore: Used by: Lint. This attribute accepts a comma-separated list of lint issue ID's that you'd
         like the tools to ignore on this element or any of its decendents.
-    -->
+-->

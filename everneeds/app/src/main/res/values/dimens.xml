@@ -62,5 +62,6 @@
     <dimen name="more_user_profile_item_height">60dp</dimen>
     <dimen name="more_user_profile_item_margin_left">10dp</dimen>
     <dimen name="more_user_profile_item_margin_right">20dp</dimen>
+    <dimen name="more_sub_divider_margin_left">60dp</dimen>
 
 </resources>

@@ -1,8 +1,11 @@
 package com.yuxifu.everneeds.ui.categories.more;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +14,14 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui.categories.base.NavigationFragment;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleSwitchListItemView;
+import com.yuxifu.everneeds.ui.settings.SettingsMultiplePageActivity;
+import com.yuxifu.everneeds.ui.settings.SettingsOnePageActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,8 +43,9 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
 
     private OnFragmentInteractionListener mListener;
 
-    LinearLayout linearLayout;
+    private LinearLayout linearLayout;
     private Switch nightModeSwitch;
+    private TextView settingsTextView;
 
     public MoreNavigationFragment() {
         // Required empty public constructor
@@ -95,14 +102,31 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         ImageTitleImageListItemView statistics = view.findViewById(R.id.statistics_item);
         ImageTitleImageListItemView favorites = view.findViewById(R.id.favorites_item);
         ImageTitleImageListItemView settings = view.findViewById(R.id.settings_item);
+        ImageTitleImageListItemView settingsOnePage = view.findViewById(R.id.settings_one_page_item);
         profile.setOnClickListener(this);
         qr.setOnClickListener(this);
         statistics.setOnClickListener(this);
         favorites.setOnClickListener(this);
         settings.setOnClickListener(this);
+        settingsOnePage.setOnClickListener(this);
+
+        //
+        settingsTextView = view.findViewById(R.id.settingsContent);
+        updateSettingsText();
 
         //
         return view;
+    }
+
+    private void updateSettingsText(){
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        StringBuilder builder = new StringBuilder();
+        builder.append("Perform Sync:\t" + sharedPrefs.getBoolean("perform_sync", false));
+        builder.append("\n" + "Sync Intervals:\t" + sharedPrefs.getString("sync_interval", "not set yet"));
+        builder.append("\n" + "Name:\t" + sharedPrefs.getString("full_name", "not set yet"));
+        builder.append("\n" + "Email Address:\t" + sharedPrefs.getString("email_address", "not set yet"));
+        builder.append("\n" + "Customized Notification Ringtone:\t" + sharedPrefs.getString("notification_ringtone", ""));
+        settingsTextView.setText(builder.toString());
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -165,6 +189,9 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
             case R.id.settings_item:
                 doSettings();
                 break;
+            case R.id.settings_one_page_item:
+                doSettingsOnePage();
+                break;
             default:
                 break;
         }
@@ -191,7 +218,20 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     }
 
     private void doSettings() {
-        mainActivity.showSnackbarShortNotImplementedIdMessage("Settings");
+        //mainActivity.showSnackbarShortNotImplementedIdMessage("Settings");
+        Intent modifySettings = new Intent(context, SettingsMultiplePageActivity.class);
+        startActivity(modifySettings);
     }
 
+    private void doSettingsOnePage() {
+        //mainActivity.showSnackbarShortNotImplementedIdMessage("Settings");
+        Intent modifySettings = new Intent(context, SettingsOnePageActivity.class);
+        startActivity(modifySettings);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateSettingsText();
+    }
 }

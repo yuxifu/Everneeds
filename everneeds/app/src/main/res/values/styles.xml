@@ -18,11 +18,19 @@
     <style name="AppTheme" parent="AppTheme.Used" />
 
     <style name="AppTheme.Used" parent="AppTheme.Wechat" />
+    <style name="AppTheme.DarkActionBar.Used" parent="AppTheme.Wechat.DarkActionBar" />
 
     <style name="AppTheme.TransNav" parent="AppTheme.Used" />
 
     <!-- theme wechat -->
     <style name="AppTheme.Wechat" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_wechat</item>
+        <item name="colorPrimaryDark">@color/primary_dark_wechat</item>
+        <item name="colorAccent">@color/accent_wechat</item>
+    </style>
+
+    <!-- theme wechat - action bar -->
+    <style name="AppTheme.Wechat.DarkActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/primary_wechat</item>
         <item name="colorPrimaryDark">@color/primary_dark_wechat</item>
         <item name="colorAccent">@color/accent_wechat</item>
