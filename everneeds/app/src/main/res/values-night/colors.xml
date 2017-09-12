@@ -19,4 +19,7 @@
     <!-- darker panel background -->
     <!--<color name="card_view_container_background_grey">#10000000</color> -->
 
+    <!-- bottom tab layout color -->
+    <color name="bottom_tab_layout_background">#FF333333</color>
+
 </resources>
