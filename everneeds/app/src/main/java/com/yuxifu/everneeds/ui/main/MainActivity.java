@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
@@ -31,6 +32,7 @@ import com.yuxifu.everneeds.ui._exp.dummy.DummyContent;
 import com.yuxifu.everneeds.ui.adapters.ViewPagerAdapter;
 import com.yuxifu.everneeds.ui.categories.more.MoreNavigationFragment;
 import com.yuxifu.everneeds.ui.categories.plan.PlanNavigationFragment;
+import com.yuxifu.everneeds.ui.custom_views.CanDisableSwipingViewPager;
 import com.yuxifu.everneeds.ui.products.calendar.CalendarWidgetFragment;
 import com.yuxifu.everneeds.ui.products.todolist.TodoWidgetFragment;
 import com.yuxifu.everneeds.util.ResourceHelper;
@@ -60,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements
     //
     private MainActivity self;
     private CoordinatorLayout coordinatorLayout;
+    private AppBarLayout appBarLayout;
     private Toolbar toolbar;
-    private ViewPager viewPager;
+    private CanDisableSwipingViewPager viewPager;
 
     @Override
     @CallSuper
@@ -72,17 +75,20 @@ public class MainActivity extends AppCompatActivity implements
         //super
         super.onCreate(savedInstanceState);
         self = this;
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_auto_scroll_toolbar);
 
         //
         coordinatorLayout = findViewById(R.id.main_content);
+        appBarLayout = findViewById(R.id.main_appbar);
 
         // Toolbar
         toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        enableActionBarHideOnScroll(AppPreferences.getActionBarHideOnScroll(this));
 
         viewPager = findViewById(R.id.main_viewpager);
         setupViewPager(viewPager);
+        viewPager.disableSwiping(!AppPreferences.getMainNavigationSwipingOn(this));
 
         SmartTabLayout smartLayout = findViewById(R.id.main_bottom_tab);
         setupNavigationTabs(smartLayout);
@@ -329,6 +335,32 @@ public class MainActivity extends AppCompatActivity implements
     // Communication with child fragment
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
         showSnackbarShortMessage(item.content);
+    }
+
+    //
+    public void onPreferencesChange(){
+        enableActionBarHideOnScroll(AppPreferences.getActionBarHideOnScroll(this));
+        viewPager.disableSwiping(!AppPreferences.getMainNavigationSwipingOn(this));
+    }
+
+    //
+    public void enableActionBarHideOnScroll(boolean enable) {
+        AppBarLayout.LayoutParams params =
+                (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+        if (enable) {
+            int newFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+                    | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+                    | AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP;
+            if (params.getScrollFlags() != newFlags) {
+                params.setScrollFlags(newFlags);
+                appBarLayout.requestLayout();
+            }
+        } else {
+            if (params.getScrollFlags() != 0) {
+                params.setScrollFlags(0);
+                appBarLayout.requestLayout();
+            }
+        }
     }
 
     //

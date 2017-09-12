@@ -21,15 +21,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
                 app:title="@string/app_name">
+
+                <!-- app:layout_scrollFlags="scroll|enterAlways|snap" -->
 
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
+        <com.yuxifu.everneeds.ui.custom_views.CanDisableSwipingViewPager
             android:id="@+id/main_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

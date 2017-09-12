@@ -1,13 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- General -->
+    <PreferenceCategory
+        android:key="general_category"
+        android:title="@string/pref_header_general">
+
+        <EditTextPreference
+            android:dialogMessage="Enter Your Complete Name"
+            android:dialogTitle="Your Name"
+            android:inputType="textCapWords"
+            android:key="full_name"
+            android:summary="Enter Your Complete Name"
+            android:title="Name" />
+
+        <EditTextPreference
+            android:dialogMessage="Enter Your Email Address"
+            android:dialogTitle="Your Email Address"
+            android:inputType="textEmailAddress"
+            android:key="email_address"
+            android:summary="Enter Your Email Address"
+            android:title="Email Address" />
+
+    </PreferenceCategory>
+
+    <!-- User Interface -->
+    <PreferenceCategory
+        android:key="ui_category"
+        android:title="@string/pref_header_ui">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="PREFS_MAIN_NAV_SWIPING_ON"
+            android:title="Swipe to Navigate" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="PREFS_ACTION_BAR_HIDE_ON_SCROLL"
+            android:title="Auto Hide Action Bar" />
+
+    </PreferenceCategory>
+
+    <!-- Data Sync -->
     <PreferenceCategory
         android:key="sync_category"
-        android:title="Sync Information">
+        android:title="@string/pref_header_data_sync">
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="perform_sync"
-            android:summary="Enable or disable data sync"
+            android:summary="Enable or disable automatic data sync"
             android:title="Enable Auto Sync" />
 
         <ListPreference
@@ -21,56 +63,42 @@
 
     </PreferenceCategory>
 
+    <!-- Notification -->
     <PreferenceCategory
-        android:key="personal_category"
-        android:title="Personal Information">
+        android:key="notification_category"
+        android:title="@string/pref_header_notifications">
 
-        <EditTextPreference
-            android:dialogMessage="Enter Your Complete Name"
-            android:dialogTitle="Your Name"
-            android:inputType="textCapWords"
-            android:key="full_name"
-            android:summary="Enter Your Complete Name"
-            android:title="Name" />
-
-        <EditTextPreference
-            android:dialogMessage="Enter Your Email Address"
-            android:dialogTitle="Enter Your Email Address"
-            android:inputType="textEmailAddress"
-            android:key="email_address"
-            android:summary="Enter Your Email Address"
-            android:title="Email Address" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="custom_category"
-        android:title="Customizations">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="notification_on"
+            android:title="Turn on Notification" />
 
         <RingtonePreference
+            android:dependency="notification_on"
             android:dialogMessage="Customize Notification Ringtone for you"
             android:dialogTitle="Notification Ringtone"
             android:key="notification_ringtone"
-            android:summary="Customise Notification Ringtone for you"
+            android:summary="Customize Notification Ringtone for you"
             android:title="Notification Ringtone" />
 
     </PreferenceCategory>
 
+    <!-- other -->
     <PreferenceCategory
         android:key="about_help_category"
         android:title="About and Help">
 
         <Preference
             android:key="about"
-            android:title="@string/title_about"/>
+            android:title="@string/title_about" />
 
         <Preference
             android:key="support"
-            android:title="@string/title_support"/>
+            android:title="@string/title_support" />
 
         <Preference
             android:key="qa"
-            android:title="@string/title_qa"/>
+            android:title="@string/title_qa" />
 
     </PreferenceCategory>
 

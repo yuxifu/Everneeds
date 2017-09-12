@@ -3,6 +3,7 @@ package com.yuxifu.everneeds.ui.settings;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ public class SettingsMultiplePageActivity extends AppCompatPreferenceActivity {
         return (context.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,14 @@ public class SettingsMultiplePageActivity extends AppCompatPreferenceActivity {
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName);
     }
 
+    @Override
+    public void onHeaderClick(Header header, int position) {
+        super.onHeaderClick(header, position);
+        if (header.id == R.id.settings_about) {
+            Intent about = new Intent(this, AboutActivity.class);
+            startActivity(about);
+        }
+    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class GeneralPreferenceFragment extends PreferenceFragment {
@@ -88,21 +96,20 @@ public class SettingsMultiplePageActivity extends AppCompatPreferenceActivity {
             int preferenceFile_toLoad = -1;
             String settings = getArguments().getString("settings");
             if ("prefs_general".equalsIgnoreCase(settings)) {
-                // Load the settings_one_page from an XML resource
                 preferenceFile_toLoad = R.xml.pref_general;
+            } else if ("prefs_ui".equalsIgnoreCase(settings)) {
+                preferenceFile_toLoad = R.xml.pref_ui;
             } else if ("prefs_notification".equalsIgnoreCase(settings)) {
-                // Load the settings_one_page from an XML resource
                 preferenceFile_toLoad = R.xml.pref_notification;
             } else if ("prefs_sync".equals(settings)) {
-                // Load the settings_one_page from an XML resource
                 preferenceFile_toLoad = R.xml.pref_data_sync;
             }
 
-            addPreferencesFromResource(preferenceFile_toLoad);
-
-
+            //
+            if (preferenceFile_toLoad != -1) {
+                addPreferencesFromResource(preferenceFile_toLoad);
+            }
         }
-
 
     }
 }

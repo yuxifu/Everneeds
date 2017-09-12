@@ -20,7 +20,6 @@ import com.yuxifu.everneeds.R;
 import com.yuxifu.everneeds.ui.categories.base.NavigationFragment;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleSwitchListItemView;
-import com.yuxifu.everneeds.ui.settings.SettingsMultiplePageActivity;
 import com.yuxifu.everneeds.ui.settings.SettingsOnePageActivity;
 
 /**
@@ -101,13 +100,13 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         ImageView qr = profile.findViewById(R.id.user_qr_image);
         ImageTitleImageListItemView statistics = view.findViewById(R.id.statistics_item);
         ImageTitleImageListItemView favorites = view.findViewById(R.id.favorites_item);
-        ImageTitleImageListItemView settings = view.findViewById(R.id.settings_item);
+        //ImageTitleImageListItemView settings = view.findViewById(R.id.settings_item);
         ImageTitleImageListItemView settingsOnePage = view.findViewById(R.id.settings_one_page_item);
         profile.setOnClickListener(this);
         qr.setOnClickListener(this);
         statistics.setOnClickListener(this);
         favorites.setOnClickListener(this);
-        settings.setOnClickListener(this);
+        //settings.setOnClickListener(this);
         settingsOnePage.setOnClickListener(this);
 
         //
@@ -186,9 +185,9 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
             case R.id.night_mode_item:
                 doNightMode();
                 break;
-            case R.id.settings_item:
-                doSettings();
-                break;
+            //case R.id.settings_item:
+            //    doSettings();
+            //    break;
             case R.id.settings_one_page_item:
                 doSettingsOnePage();
                 break;
@@ -217,14 +216,14 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
         nightModeSwitch.setChecked(!nightModeSwitch.isChecked());
     }
 
+    //only use one page settings, 9/12/17
+    /*
     private void doSettings() {
-        //mainActivity.showSnackbarShortNotImplementedIdMessage("Settings");
         Intent modifySettings = new Intent(context, SettingsMultiplePageActivity.class);
         startActivity(modifySettings);
-    }
+    }*/
 
     private void doSettingsOnePage() {
-        //mainActivity.showSnackbarShortNotImplementedIdMessage("Settings");
         Intent modifySettings = new Intent(context, SettingsOnePageActivity.class);
         startActivity(modifySettings);
     }
@@ -232,6 +231,12 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
     @Override
     public void onResume() {
         super.onResume();
-        updateSettingsText();
+        onPreferencesChange();
     }
+
+    private void onPreferencesChange() {
+        updateSettingsText();
+        mainActivity.onPreferencesChange();
+    }
+
 }

@@ -146,7 +146,7 @@
     <string name="more_user_profile_user_id_title">user@example.com</string>
     <string name="night_mode_list_item_title">Night Mode</string>
     <string name="settings_list_item_title">Settings</string>
-    <string name="settings_one_page_list_item_title">Settings (one page)</string>
+    <string name="settings_one_page_list_item_title">Settings</string>
     <string name="statistics_list_item_title">Statistics</string>
     <string name="favorites_list_item_title">Favorites</string>
 
@@ -174,7 +174,8 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_settings2">Settings</string>
     <string name="pref_header_general">General</string>
-    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <string name="pref_header_ui">User Interface</string>
+    <string name="pref_header_data_sync">Data &amp; Sync</string>
     <string name="pref_header_notifications">Notifications</string>
     <string name="pref_title_new_message_notifications">New message notifications</string>
     <string name="title_about">About</string>

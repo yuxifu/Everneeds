@@ -15,5 +15,4 @@
         android:dialogTitle="Enter Your Email Address"
         android:dialogMessage="Enter Your Email Address"
         android:inputType="textEmailAddress"/>
-
 </PreferenceScreen>

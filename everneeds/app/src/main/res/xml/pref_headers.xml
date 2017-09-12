@@ -4,23 +4,33 @@
 
     <header
         android:fragment="com.yuxifu.everneeds.ui.settings.SettingsMultiplePageActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general">
-        <extra android:name="settings" android:value="prefs_general" ></extra>
+        <extra android:name="settings" android:value="prefs_general" />
     </header>
 
     <header
         android:fragment="com.yuxifu.everneeds.ui.settings.SettingsMultiplePageActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/pref_header_notifications" >
-        <extra android:name="settings" android:value="prefs_notification" ></extra>
+        android:title="@string/pref_header_ui">
+        <extra android:name="settings" android:value="prefs_ui" />
     </header>
 
     <header
         android:fragment="com.yuxifu.everneeds.ui.settings.SettingsMultiplePageActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_sync_black_24dp"
-        android:title="@string/pref_header_data_sync" >
-        <extra android:name="settings" android:value="prefs_sync" ></extra>
+        android:title="@string/pref_header_notifications">
+        <extra android:name="settings" android:value="prefs_notification" />
+    </header>
+
+    <header
+        android:fragment="com.yuxifu.everneeds.ui.settings.SettingsMultiplePageActivity$GeneralPreferenceFragment"
+        android:title="@string/pref_header_data_sync">
+        <extra android:name="settings" android:value="prefs_sync" />
+    </header>
+
+    <header
+        android:id="@+id/settings_about"
+        android:key="about"
+        android:title="@string/title_about">
+        <extra android:name="settings" android:value="prefs_about" />
     </header>
 
 </preference-headers>
