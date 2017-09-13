@@ -17,6 +17,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.yuxifu.everneeds.R;
+import com.yuxifu.everneeds.system.AppPreferences;
+import com.yuxifu.everneeds.ui.base.HomeAsUpFragmentActivity;
 import com.yuxifu.everneeds.ui.categories.base.NavigationFragment;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleImageListItemView;
 import com.yuxifu.everneeds.ui.custom_views.ImageTitleSwitchListItemView;
@@ -225,6 +227,10 @@ public class MoreNavigationFragment extends NavigationFragment implements View.O
 
     private void doSettingsOnePage() {
         Intent modifySettings = new Intent(context, SettingsOnePageActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(HomeAsUpFragmentActivity.SUPPORT_ACTION_BAR_HIDE_ON_SCROLL,
+                AppPreferences.getActionBarHideOnScroll(context));
+        modifySettings.putExtras(bundle);
         startActivity(modifySettings);
     }
 
