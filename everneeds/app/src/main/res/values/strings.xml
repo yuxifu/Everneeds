@@ -182,4 +182,9 @@
     <string name="title_qa">Questions and Answers</string>
     <string name="title_support">Support</string>
 
+    <!-- notepad -->
+    <string name="note_title">Title</string>
+    <string name="note_details">Yesterday | 128KB I think the code point you have in your example is an ellipsis.</string>
+    <string name="note_reminder">&#x23F0; Reminder</string>
+
 </resources>
